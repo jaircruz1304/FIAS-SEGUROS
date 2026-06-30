@@ -442,3 +442,87 @@ a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));m
     font-size:.92rem;
   }
 }
+
+
+/* =========================================================
+   AJUSTE: ÍCONOS VISUALES PARA PROCEDIMIENTO RÁPIDO
+   Reemplaza textos técnicos como "shield", "phone" o "camera"
+   por pictogramas SVG generados desde assets/js/app.js.
+   ========================================================= */
+.steps{
+  align-items:stretch;
+}
+.step{
+  min-height:238px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.step .step-top{
+  align-items:flex-start;
+  justify-content:space-between;
+}
+.step-icon-wrap{
+  width:68px;
+  height:68px;
+  border-radius:22px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#eefaf3,#ffffff);
+  border:1px solid #d8eee2;
+  box-shadow:0 12px 24px rgba(11,138,85,.10);
+  flex:0 0 auto;
+}
+.step-no .step-icon-wrap{
+  background:linear-gradient(135deg,#fff1f1,#ffffff);
+  border-color:#ffd6d6;
+  box-shadow:0 12px 24px rgba(180,35,24,.08);
+}
+.step-icon-wrap svg{
+  width:44px;
+  height:44px;
+  display:block;
+}
+.step-meta{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:8px;
+  margin-left:auto;
+}
+.step-number{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:28px;
+  padding:6px 11px;
+  border-radius:999px;
+  background:var(--soft);
+  color:var(--green);
+  font-size:.72rem;
+  font-weight:1000;
+  letter-spacing:.08em;
+}
+.step-kind{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:28px;
+  padding:6px 11px;
+  border-radius:999px;
+  font-size:.72rem;
+  font-weight:1000;
+}
+.step-kind.ok{background:#e6f7ed;color:var(--ok)}
+.step-kind.no{background:#fef2f2;color:var(--danger)}
+.step h3{
+  margin-top:6px;
+}
+.step .badge{
+  display:none;
+}
+@media (max-width:640px){
+  .step-icon-wrap{width:62px;height:62px;border-radius:20px}
+  .step-icon-wrap svg{width:40px;height:40px}
+  .step-meta{align-items:flex-end}
+}

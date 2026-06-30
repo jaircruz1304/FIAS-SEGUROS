@@ -24,6 +24,24 @@ const iconFor = (cat = "") => {
   return "🚗";
 };
 
+
+const stepIconSvg = (name = "", type = "") => {
+  const key = clean(name).toLowerCase();
+  const isNo = clean(type).toUpperCase() === "NO_HACER";
+  const stroke = isNo ? "#b42318" : "#078750";
+  const fill = isNo ? "#fef2f2" : "#e6f7ed";
+  const icons = {
+    shield: `<svg viewBox="0 0 64 64" role="img" aria-label="Seguridad"><path d="M32 6 52 14v16c0 13.5-8 23.5-20 28C20 53.5 12 43.5 12 30V14L32 6Z" fill="${fill}" stroke="${stroke}" stroke-width="4"/><path d="M24 32l5.5 5.5L42 23" fill="none" stroke="${stroke}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    phone: `<svg viewBox="0 0 64 64" role="img" aria-label="Llamar"><path d="M23 13c-2 0-7 6-7 9 0 20 16 36 36 36 3 0 9-5 9-7l-3-11c-.6-2-2.7-3-4.6-2.3l-7.2 2.8c-4.8-2.4-9-6.6-11.4-11.4l2.8-7.2C37.3 20 36.3 18 34.3 17.4L23 13Z" fill="${fill}" stroke="${stroke}" stroke-width="4" stroke-linejoin="round"/><path d="M43 12c5 1.4 8.6 5 10 10M41 22c2.1.6 3.5 2 4 4" fill="none" stroke="${stroke}" stroke-width="4" stroke-linecap="round"/></svg>`,
+    camera: `<svg viewBox="0 0 64 64" role="img" aria-label="Evidencia fotográfica"><path d="M14 22h10l4-6h8l4 6h10a6 6 0 0 1 6 6v20a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6V28a6 6 0 0 1 6-6Z" fill="${fill}" stroke="${stroke}" stroke-width="4"/><circle cx="32" cy="38" r="10" fill="none" stroke="${stroke}" stroke-width="4"/><path d="M47 30h.1" stroke="${stroke}" stroke-width="6" stroke-linecap="round"/></svg>`,
+    ban: `<svg viewBox="0 0 64 64" role="img" aria-label="No pactar"><circle cx="32" cy="32" r="23" fill="${fill}" stroke="${stroke}" stroke-width="4"/><path d="M17 47 47 17" stroke="${stroke}" stroke-width="5" stroke-linecap="round"/><path d="M23 34c4-5 9-5 14 0 4 4 8 3 11-1" fill="none" stroke="${stroke}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    alert: `<svg viewBox="0 0 64 64" role="img" aria-label="Alerta"><path d="M32 8 58 54H6L32 8Z" fill="${fill}" stroke="${stroke}" stroke-width="4" stroke-linejoin="round"/><path d="M32 24v14" stroke="${stroke}" stroke-width="5" stroke-linecap="round"/><circle cx="32" cy="46" r="3" fill="${stroke}"/></svg>`,
+    file: `<svg viewBox="0 0 64 64" role="img" aria-label="Comunicar y documentar"><path d="M18 8h20l12 12v34a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4Z" fill="${fill}" stroke="${stroke}" stroke-width="4" stroke-linejoin="round"/><path d="M38 8v14h12" fill="none" stroke="${stroke}" stroke-width="4" stroke-linejoin="round"/><path d="M23 34h18M23 43h18M23 25h8" stroke="${stroke}" stroke-width="4" stroke-linecap="round"/></svg>`,
+    check: `<svg viewBox="0 0 64 64" role="img" aria-label="Paso"><circle cx="32" cy="32" r="24" fill="${fill}" stroke="${stroke}" stroke-width="4"/><path d="M21 33l7 7 16-18" fill="none" stroke="${stroke}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+  };
+  return icons[key] || icons.check;
+};
+
 function formatDate(iso) {
   if (!iso) return "—";
   const d = new Date(`${iso}T00:00:00`);
@@ -78,17 +96,25 @@ function renderAssistance(rows = []) {
 }
 
 function renderSteps(rows = []) {
-  $("stepsGrid").innerHTML = rows
+  const visibleRows = rows
     .filter(r => safe(r.mostrar_web).toUpperCase() !== "NO")
-    .sort((a,b)=>(+a.orden||0)-(+b.orden||0))
-    .map(r => {
+    .sort((a,b)=>(+a.orden||0)-(+b.orden||0));
+
+  $("stepsGrid").innerHTML = visibleRows.map(r => {
       const no = safe(r.tipo).toUpperCase() === "NO_HACER";
-      return `<article class="step">
-        <div class="step-top"><span class="tag">${r.orden}. ${safe(r.icono)}</span><span class="badge ${no ? "no" : "ok"}">${no ? "No hacer" : "Hacer"}</span></div>
+      const order = Number(r.orden) || 0;
+      return `<article class="step ${no ? "step-no" : "step-ok"}">
+        <div class="step-top">
+          <div class="step-icon-wrap" aria-hidden="true">${stepIconSvg(r.icono, r.tipo)}</div>
+          <div class="step-meta">
+            <span class="step-number">PASO ${order.toString().padStart(2, "0")}</span>
+            <span class="step-kind ${no ? "no" : "ok"}">${no ? "No hacer" : "Hacer"}</span>
+          </div>
+        </div>
         <h3>${safe(r.titulo)}</h3>
         <p>${safe(r.descripcion)}</p>
       </article>`;
-    }).join("");
+    }).join("") || emptyCardState("Ingresa el procedimiento", "Actualiza la hoja Procedimiento_Siniestro del Excel maestro para visualizar los pasos con sus íconos.");
 }
 
 function populateFilters(data) {
