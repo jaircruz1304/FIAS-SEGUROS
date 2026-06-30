@@ -4,7 +4,7 @@
     "pregunta": "¿Qué hago si el vehículo no puede movilizarse?",
     "respuesta": "Comunícate con la asistencia autorizada y solicita coordinación de grúa o wincha. Evita contratar servicios externos sin autorización.",
     "categoria": "Asistencia",
-    "orden": 1,
+    "orden": "1",
     "mostrar_web": "SI"
   },
   {
@@ -12,7 +12,7 @@
     "pregunta": "¿Puedo reparar el vehículo inmediatamente?",
     "respuesta": "No. Primero se debe reportar el siniestro y esperar la autorización de la aseguradora o del responsable institucional.",
     "categoria": "Siniestros",
-    "orden": 2,
+    "orden": "2",
     "mostrar_web": "SI"
   },
   {
@@ -20,7 +20,7 @@
     "pregunta": "¿Qué información debo tener a la mano al llamar?",
     "respuesta": "Placa, ubicación exacta, datos del conductor, tipo de evento, fotografías y una descripción breve de lo ocurrido.",
     "categoria": "Asistencia",
-    "orden": 3,
+    "orden": "3",
     "mostrar_web": "SI"
   },
   {
@@ -28,7 +28,7 @@
     "pregunta": "¿Dónde se actualizan los datos de la web?",
     "respuesta": "La información se edita en el Excel maestro de OneDrive. GitHub Actions sincroniza el archivo y genera los JSON que consume la web.",
     "categoria": "Sistema",
-    "orden": 4,
+    "orden": "4",
     "mostrar_web": "SI"
   }
 ]
