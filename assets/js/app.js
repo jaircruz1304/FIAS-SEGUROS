@@ -97,14 +97,43 @@ function populateFilters(data) {
   $("policyStatus").innerHTML = `<option value="">Todos los estados</option><option value="vigente">Vigentes</option><option value="por_vencer">Por vencer</option><option value="vencida">Vencidas</option>`;
 }
 
+function emptyTableRow(title, text, colspan = 7) {
+  return `<tr class="empty-row"><td colspan="${colspan}"><div class="empty-state"><strong>${title}</strong>${text}</div></td></tr>`;
+}
+
+function emptyCardState(title, text) {
+  return `<div class="empty-state"><strong>${title}</strong>${text}</div>`;
+}
+
 function renderPolicies() {
-  const q = lower($("policySearch").value);
+  if (!STORE) return;
+  const qRaw = clean($("policySearch").value);
+  const q = qRaw.toLowerCase();
   const status = $("policyStatus").value;
-  const rows = (STORE.polizas || []).filter(p => safe(p.mostrar_web).toUpperCase() !== "NO").filter(p => {
+  const allRows = (STORE.polizas || []).filter(p => safe(p.mostrar_web).toUpperCase() !== "NO");
+
+  if (!allRows.length) {
+    $("policyTable").innerHTML = emptyTableRow(
+      "Ingresa datos para procesar la información",
+      "Actualiza la hoja de pólizas en el Excel maestro o ejecuta la sincronización desde OneDrive/SharePoint para visualizar los registros."
+    );
+    return;
+  }
+
+  const rows = allRows.filter(p => {
     const st = statusFor(p.vig_hasta);
     const text = [p.id_poliza,p.poliza_numero,p.aseguradora,p.reserva_proyecto,p.pdf_nombre].map(lower).join(" ");
     return (!q || text.includes(q)) && (!status || st.key === status);
   });
+
+  if (!rows.length) {
+    $("policyTable").innerHTML = emptyTableRow(
+      "No hay resultados con esos criterios",
+      "Modifica la búsqueda, limpia los filtros o selecciona otro estado para consultar las pólizas disponibles."
+    );
+    return;
+  }
+
   $("policyTable").innerHTML = rows.map(p => {
     const st = statusFor(p.vig_hasta);
     return `<tr>
@@ -116,16 +145,37 @@ function renderPolicies() {
       <td>${money.format(+p.total_pagado || 0)}</td>
       <td><span class="status ${st.key}">${st.label}</span></td>
     </tr>`;
-  }).join("") || `<tr><td colspan="7">No se encontraron pólizas.</td></tr>`;
+  }).join("");
 }
 
 function renderVehicles() {
-  const q = lower($("vehicleSearch").value);
+  if (!STORE) return;
+  const qRaw = clean($("vehicleSearch").value);
+  const q = qRaw.toLowerCase();
   const cat = $("categoryFilter").value;
-  const rows = (STORE.bienes || []).filter(v => safe(v.mostrar_web).toUpperCase() !== "NO").filter(v => {
+  const allRows = (STORE.bienes || []).filter(v => safe(v.mostrar_web).toUpperCase() !== "NO");
+
+  if (!allRows.length) {
+    $("vehicleCards").innerHTML = emptyCardState(
+      "Ingresa datos para procesar la información",
+      "Actualiza la hoja de bienes asegurados en el Excel maestro o ejecuta la sincronización desde OneDrive/SharePoint para visualizar los vehículos."
+    );
+    return;
+  }
+
+  const rows = allRows.filter(v => {
     const text = [v.placa,v.marca,v.modelo,v.reserva_proyecto,v.id_poliza,v.categoria].map(lower).join(" ");
     return (!q || text.includes(q)) && (!cat || v.categoria === cat);
   });
+
+  if (!rows.length) {
+    $("vehicleCards").innerHTML = emptyCardState(
+      "No hay resultados con esos criterios",
+      "Modifica la búsqueda, limpia los filtros o selecciona otra categoría para consultar los bienes asegurados disponibles."
+    );
+    return;
+  }
+
   $("vehicleCards").innerHTML = rows.map(v => `<article class="vcard">
     <span class="tag">${iconFor(v.categoria)} ${safe(v.categoria)}</span>
     <h3>${safe(v.marca)} ${safe(v.modelo)}</h3>
@@ -136,7 +186,7 @@ function renderVehicles() {
       <div class="detail"><b>Reserva / Proyecto</b><span>${safe(v.reserva_proyecto)}</span></div>
       <div class="detail"><b>Deducible</b><span>${safe(v.deducible)}</span></div>
     </div>
-  </article>`).join("") || `<div class="error-box">No se encontraron bienes asegurados.</div>`;
+  </article>`).join("");
 }
 
 function renderDocuments(rows = []) {
@@ -231,7 +281,7 @@ function renderVideos(rows = []) {
         <p>${description}</p>
       </div>
     </article>`;
-  }).join("") || `<div class="error-box">No hay videos informativos cargados.</div>`;
+  }).join("") || emptyCardState("Ingresa videos informativos", "Carga los archivos MP4 en assets/videos/ y registra sus rutas en la hoja Videos del Excel maestro.");
 }
 
 function exportCsv() {
