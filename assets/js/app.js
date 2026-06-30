@@ -4,8 +4,17 @@ let STORE = null;
 const $ = (id) => document.getElementById(id);
 const money = new Intl.NumberFormat("es-EC", { style: "currency", currency: "USD" });
 const num = new Intl.NumberFormat("es-EC");
+
 const safe = (value) => value === null || value === undefined || value === "" ? "—" : String(value);
 const lower = (value) => safe(value).toLowerCase();
+const clean = (value) => value === null || value === undefined || value === "" || value === "—" ? "" : String(value).trim();
+const esc = (value) => clean(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
 const iconFor = (cat = "") => {
   const c = cat.toLowerCase();
   if (c.includes("moto")) return "🏍️";
@@ -145,15 +154,46 @@ function renderFAQ(rows = []) {
 }
 
 function renderVideos(rows = []) {
-  $("videoGrid").innerHTML = rows
+  const visibleVideos = rows
     .filter(r => safe(r.mostrar_web).toUpperCase() !== "NO")
-    .sort((a,b)=>(+a.orden||0)-(+b.orden||0))
-    .map(r => `<article class="video-card">
-      <video controls preload="metadata" poster="${safe(r.miniatura_repo)}" onerror="this.outerHTML='<div class=&quot;video-placeholder&quot;>▶️ ${safe(r.titulo)}</div>'">
-        <source src="${safe(r.archivo_repo)}" type="video/mp4">
-      </video>
-      <div class="content"><h3>${safe(r.titulo)}</h3><p>${safe(r.descripcion)}</p></div>
-    </article>`).join("");
+    .sort((a,b)=>(+a.orden||0)-(+b.orden||0));
+
+  $("videoGrid").classList.add("phone-video-grid");
+
+  $("videoGrid").innerHTML = visibleVideos.map((r, index) => {
+    const videoSrc = clean(r.archivo_repo);
+    const poster = clean(r.miniatura_repo);
+    const posterAttr = poster ? ` poster="${esc(poster)}"` : "";
+    const title = safe(r.titulo);
+    const description = safe(r.descripcion);
+    const category = clean(r.categoria) || "Video informativo";
+
+    const media = videoSrc
+      ? `<video class="phone-video" controls playsinline preload="metadata"${posterAttr} aria-label="${esc(title)}">
+          <source src="${esc(videoSrc)}" type="video/mp4">
+          Tu navegador no puede reproducir este video.
+        </video>`
+      : `<div class="phone-video-placeholder"><strong>▶</strong><span>Agrega el archivo MP4 en assets/videos/</span></div>`;
+
+    return `<article class="video-phone-card">
+      <div class="phone-frame" aria-label="Video en formato teléfono">
+        <div class="phone-side phone-side-left"></div>
+        <div class="phone-side phone-side-right"></div>
+        <div class="phone-inner">
+          <div class="phone-speaker"></div>
+          <div class="phone-camera"></div>
+          <div class="phone-screen-video">
+            ${media}
+          </div>
+        </div>
+      </div>
+      <div class="video-caption">
+        <span class="video-pill">${index + 1 < 10 ? `0${index + 1}` : index + 1} · ${safe(category)}</span>
+        <h3>${title}</h3>
+        <p>${description}</p>
+      </div>
+    </article>`;
+  }).join("") || `<div class="error-box">No hay videos informativos cargados.</div>`;
 }
 
 function exportCsv() {
