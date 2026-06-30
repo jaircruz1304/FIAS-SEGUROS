@@ -1,0 +1,58 @@
+[
+  {
+    "tipo_catalogo": "categoria_vehiculo",
+    "codigo": "MOTO",
+    "nombre": "Moto",
+    "orden": 1,
+    "activo": "SI"
+  },
+  {
+    "tipo_catalogo": "categoria_vehiculo",
+    "codigo": "CAMIONETA",
+    "nombre": "Camioneta",
+    "orden": 2,
+    "activo": "SI"
+  },
+  {
+    "tipo_catalogo": "categoria_vehiculo",
+    "codigo": "JEEP_SUV",
+    "nombre": "Jeep/SUV",
+    "orden": 3,
+    "activo": "SI"
+  },
+  {
+    "tipo_catalogo": "categoria_vehiculo",
+    "codigo": "CUADRON",
+    "nombre": "Cuadrón",
+    "orden": 4,
+    "activo": "SI"
+  },
+  {
+    "tipo_catalogo": "mostrar_web",
+    "codigo": "SI",
+    "nombre": "Sí se muestra en la web",
+    "orden": 1,
+    "activo": "SI"
+  },
+  {
+    "tipo_catalogo": "mostrar_web",
+    "codigo": "NO",
+    "nombre": "No se muestra en la web",
+    "orden": 2,
+    "activo": "SI"
+  },
+  {
+    "tipo_catalogo": "tipo_paso",
+    "codigo": "HACER",
+    "nombre": "Qué hacer",
+    "orden": 1,
+    "activo": "SI"
+  },
+  {
+    "tipo_catalogo": "tipo_paso",
+    "codigo": "NO_HACER",
+    "nombre": "Qué no hacer",
+    "orden": 2,
+    "activo": "SI"
+  }
+]

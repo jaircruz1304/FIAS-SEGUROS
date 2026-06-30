@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FIAS Seguro Vehicular: pólizas vigentes, bienes asegurados, asistencia y procedimientos ante siniestros." />
+  <title>FIAS | Seguro Vehicular</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="FIAS Seguro Vehicular">
+        <span class="brand-mark">FIAS</span>
+        <span><strong>Seguro Vehicular</strong><small>Informativo institucional dinámico</small></span>
+      </a>
+      <button class="menu-button" id="menuButton" aria-label="Abrir menú">☰</button>
+      <div class="navlinks" id="navLinks">
+        <a href="#asistencia">Asistencia</a>
+        <a href="#procedimiento">Siniestro</a>
+        <a href="#polizas">Pólizas</a>
+        <a href="#vehiculos">Vehículos</a>
+        <a href="#videos">Videos</a>
+        <a href="#documentos">Documentos</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Gestión dinámica desde OneDrive + GitHub Actions</p>
+          <h1 id="heroTitle">Seguro Vehicular FIAS</h1>
+          <p class="hero-sub" id="heroSubtitle">Información dinámica de pólizas, bienes asegurados, asistencia y pasos de atención ante siniestros.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#asistencia">📞 Ver asistencia</a>
+            <a class="btn btn-ghost" href="#polizas">📄 Consultar pólizas</a>
+            <button class="btn btn-ghost" id="btnExportCsv">⬇️ Descargar CSV</button>
+          </div>
+          <div class="sync-card" id="syncMeta">Cargando datos...</div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="phone">
+            <div class="screen">
+              <span class="shield">✓</span>
+              <strong>Siempre<br/>a tu lado</strong>
+              <small>FIAS · Seguro Vehicular</small>
+            </div>
+          </div>
+          <div class="road"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section kpi-section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-icon">📊</span>
+          <div>
+            <h2>Resumen de cobertura</h2>
+            <p>Indicadores calculados automáticamente desde la base de datos sincronizada.</p>
+          </div>
+        </div>
+        <div class="kpis" id="kpiGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="asistencia">
+      <div class="wrap two-col">
+        <div class="scene-card">
+          <div class="emergency-illustration">
+            <span>🚗</span>
+            <b>⚠️</b>
+          </div>
+        </div>
+        <div class="assistance-card">
+          <span class="label">Seguro vehicular</span>
+          <h2>¿Qué hacer en caso de siniestro o avería?</h2>
+          <p>Comunícate con los canales oficiales y evita realizar pagos, acuerdos o reparaciones sin autorización.</p>
+          <div id="assistanceList" class="assistance-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="procedimiento">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-icon">🛡️</span>
+          <div>
+            <h2>Procedimiento rápido</h2>
+            <p>Pasos prácticos para custodios, conductores y responsables institucionales.</p>
+          </div>
+        </div>
+        <div class="steps" id="stepsGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="polizas">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-icon">📄</span>
+          <div>
+            <h2>Pólizas vigentes</h2>
+            <p>Consulta de pólizas, vigencias, valores asegurados y estado de cobertura.</p>
+          </div>
+        </div>
+        <div class="toolbar">
+          <input id="policySearch" type="search" placeholder="Buscar póliza, reserva, aseguradora..." />
+          <select id="policyStatus"><option value="">Todos los estados</option></select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Póliza</th>
+                <th>Aseguradora</th>
+                <th>Vigencia</th>
+                <th>Reserva / Proyecto</th>
+                <th>Suma asegurada</th>
+                <th>Total pagado</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="policyTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="vehiculos">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-icon">🚙</span>
+          <div>
+            <h2>Bienes asegurados</h2>
+            <p>Tarjetas dinámicas por placa, vehículo, moto o cuadrón.</p>
+          </div>
+        </div>
+        <div class="toolbar">
+          <input id="vehicleSearch" type="search" placeholder="Buscar placa, marca, modelo, reserva..." />
+          <select id="categoryFilter"><option value="">Todas las categorías</option></select>
+        </div>
+        <div id="vehicleCards" class="cards"></div>
+      </div>
+    </section>
+
+    <section class="section" id="videos">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-icon">▶️</span>
+          <div>
+            <h2>Videos informativos</h2>
+            <p>Los videos se almacenan dentro del mismo repositorio de GitHub.</p>
+          </div>
+        </div>
+        <div class="videos" id="videoGrid"></div>
+      </div>
+    </section>
+
+    <section class="section soft" id="documentos">
+      <div class="wrap grid-2">
+        <div>
+          <div class="section-head compact">
+            <span class="section-icon">📋</span>
+            <div><h2>Documentos requeridos</h2><p>Lista editable desde el Excel maestro.</p></div>
+          </div>
+          <div id="docList" class="checklist"></div>
+        </div>
+        <div>
+          <div class="section-head compact">
+            <span class="section-icon">❓</span>
+            <div><h2>Preguntas frecuentes</h2><p>Actualizables desde OneDrive.</p></div>
+          </div>
+          <div id="faqList" class="faq-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <strong>FIAS · Seguro Vehicular</strong>
+      <p id="footerNote">La información publicada es de carácter informativo y debe contrastarse con la póliza vigente y sus condiciones particulares.</p>
+      <p class="small">Datos sincronizados desde OneDrive mediante GitHub Actions. Videos alojados en este repositorio.</p>
+    </div>
+  </footer>
+
+  <template id="errorTemplate">
+    <div class="error-box">
+      <strong>No se pudo cargar la información dinámica.</strong>
+      <p>Verifica que exista el archivo <code>data/seguros/seguros-vehiculares.json</code> y que GitHub Pages esté publicado correctamente.</p>
+    </div>
+  </template>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
