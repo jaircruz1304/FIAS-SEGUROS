@@ -153,6 +153,44 @@ function renderFAQ(rows = []) {
     .map(r => `<div class="faq-item"><strong>${safe(r.pregunta)}</strong><p>${safe(r.respuesta)}</p></div>`).join("");
 }
 
+function setHeroVideo(rows = []) {
+  const heroVideo = $("heroVideo");
+  const heroSource = $("heroVideoSource");
+  if (!heroVideo || !heroSource) return;
+
+  const visibleVideos = rows
+    .filter(r => safe(r.mostrar_web).toUpperCase() !== "NO")
+    .sort((a,b)=>(+a.orden||0)-(+b.orden||0));
+
+  const siniestroVideo = visibleVideos.find(r => {
+    const text = [r.titulo, r.categoria, r.descripcion].map(lower).join(" ");
+    return text.includes("siniestro") || text.includes("asistencia");
+  }) || visibleVideos[0];
+
+  if (!siniestroVideo) return;
+
+  const src = clean(siniestroVideo.archivo_repo);
+  const poster = clean(siniestroVideo.miniatura_repo);
+
+  if (src && heroSource.getAttribute("src") !== src) {
+    heroSource.setAttribute("src", src);
+    heroVideo.load();
+  }
+
+  if (poster) {
+    heroVideo.setAttribute("poster", poster);
+  }
+
+  heroVideo.setAttribute("aria-label", clean(siniestroVideo.titulo) || "¿Qué hacer en caso de siniestro?");
+
+  const tryPlay = heroVideo.play();
+  if (tryPlay && typeof tryPlay.catch === "function") {
+    tryPlay.catch(() => {
+      // El navegador puede bloquear la reproducción automática; el usuario podrá reproducirlo con los controles.
+    });
+  }
+}
+
 function renderVideos(rows = []) {
   const visibleVideos = rows
     .filter(r => safe(r.mostrar_web).toUpperCase() !== "NO")
@@ -222,6 +260,7 @@ async function init() {
     populateFilters(STORE);
     renderPolicies();
     renderVehicles();
+    setHeroVideo(STORE.videos);
     renderVideos(STORE.videos);
     renderDocuments(STORE.documentos_requeridos);
     renderFAQ(STORE.faq);
