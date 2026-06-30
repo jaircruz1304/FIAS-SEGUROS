@@ -60,13 +60,39 @@ function statusFor(endIso) {
   return { key: "vigente", label: `Vigente (${diff} días)` };
 }
 
+function finalUserText(value, fallback) {
+  const text = clean(value) || fallback;
+  return text
+    .replace(/Información dinámica de pólizas, bienes asegurados, asistencia y pasos de atención ante siniestros\.?/gi, "Consulta de pólizas vigentes, bienes asegurados, asistencia y pasos de atención ante siniestros.")
+    .replace(/Información dinámica de pólizas y bienes asegurados\.?/gi, "Consulta de pólizas vigentes y bienes asegurados.")
+    .replace(/dinámica/gi, "")
+    .replace(/OneDrive\s*\/?\s*SharePoint\s*\+\s*GitHub Actions/gi, "")
+    .replace(/OneDrive/gi, "")
+    .replace(/SharePoint/gi, "")
+    .replace(/GitHub Actions/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+function formatPublicDate(value) {
+  const raw = clean(value);
+  if (!raw) return "";
+  const datePart = raw.split("T")[0];
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(datePart)) return raw;
+  const [y,m,d] = datePart.split("-");
+  return `${d}/${m}/${y}`;
+}
+
 function setConfig(data) {
   const config = data.config || {};
-  $("heroTitle").textContent = config.titulo_principal || "Seguro Vehicular FIAS";
-  $("heroSubtitle").textContent = config.subtitulo_principal || "Información dinámica de pólizas y bienes asegurados.";
-  $("footerNote").textContent = config.nota_general || "Información de carácter informativo.";
+  $("heroTitle").textContent = finalUserText(config.titulo_principal, "Seguro Vehicular FIAS");
+  $("heroSubtitle").textContent = finalUserText(config.subtitulo_principal, "Consulta de pólizas vigentes, bienes asegurados, asistencia y pasos de atención ante siniestros.");
+  $("footerNote").textContent = finalUserText(config.nota_general, "La información publicada es de carácter informativo y debe contrastarse con la póliza vigente y sus condiciones particulares.");
   const meta = data.meta || {};
-  $("syncMeta").innerHTML = `🟢 Última sincronización: <b>${safe(meta.ultima_actualizacion)}</b> · Fuente: ${safe(meta.fuente)}`;
+  const fecha = formatPublicDate(meta.ultima_actualizacion);
+  $("syncMeta").innerHTML = fecha
+    ? `🟢 Información actualizada al <b>${safe(fecha)}</b>`
+    : `🟢 Información disponible para consulta institucional`;
 }
 
 function renderKPIs(kpis = {}) {
@@ -350,6 +376,6 @@ $("policySearch").addEventListener("input", renderPolicies);
 $("policyStatus").addEventListener("change", renderPolicies);
 $("vehicleSearch").addEventListener("input", renderVehicles);
 $("categoryFilter").addEventListener("change", renderVehicles);
-$("btnExportCsv").addEventListener("click", exportCsv);
+if ($("btnExportCsv")) $("btnExportCsv").addEventListener("click", exportCsv);
 $("menuButton").addEventListener("click", () => $("navLinks").classList.toggle("open"));
 init();

@@ -526,3 +526,49 @@ a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));m
   .step-icon-wrap svg{width:40px;height:40px}
   .step-meta{align-items:flex-end}
 }
+
+
+/* === AJUSTES FINALES PARA USUARIO FINAL / LOGO FIAS === */
+.brand{
+  gap:14px;
+}
+.brand-logo{
+  height:48px;
+  width:auto;
+  max-width:190px;
+  object-fit:contain;
+  display:block;
+}
+.brand small{
+  color:#5f6b7d;
+  font-size:.78rem;
+  letter-spacing:.01em;
+}
+.topbar{
+  background:rgba(255,255,255,.94);
+}
+.update-card{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:12px 16px;
+  color:var(--muted);
+  font-weight:800;
+  box-shadow:var(--shadow2);
+}
+.update-card b{
+  color:var(--green);
+}
+.eyebrow{
+  background:rgba(11,138,85,.09);
+}
+.footer .small{
+  color:rgba(255,255,255,.78);
+}
+@media (max-width:640px){
+  .brand-logo{height:42px;max-width:150px}
+  .brand span{display:none}
+}
