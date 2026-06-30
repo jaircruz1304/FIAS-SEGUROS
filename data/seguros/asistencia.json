@@ -1,15 +1,15 @@
 [
   {
     "id_asistencia": "AST-001",
-    "proveedor": "Aseguradora del Sur",
-    "servicio": "Siniestros y averías",
-    "telefono_principal": "099 555 3333",
-    "telefono_secundario": "02 2997500",
+    "proveedor": "ASERTEC",
+    "servicio": "Broker de seguros · Asistencia 24/7",
+    "telefono_principal": "1-800 273783",
+    "telefono_secundario": "(02) 381 9880",
     "horario": "24/7",
-    "descripcion": "Notificar de inmediato el siniestro o avería para coordinar asistencia, grúa o wincha con el proveedor autorizado.",
-    "condiciones": "La asistencia debe gestionarse por los canales oficiales indicados por la aseguradora. No contratar proveedores externos sin autorización.",
+    "descripcion": "Comunícate con el broker para solicitar asistencia en caso de siniestro, accidente, avería o requerimiento de coordinación con la aseguradora.",
+    "condiciones": "Levanta registro fotográfico o video del hecho. No pactes acuerdos, no asumas responsabilidad y no realices pagos ni reparaciones sin autorización.",
     "mostrar_web": "SI",
-    "orden": 1
+    "orden": "1"
   },
   {
     "id_asistencia": "AST-002",
@@ -18,9 +18,9 @@
     "telefono_principal": "Pendiente de definir",
     "telefono_secundario": "",
     "horario": "Horario institucional",
-    "descripcion": "Informar al responsable administrativo o custodio institucional para el registro y seguimiento interno del evento.",
-    "condiciones": "Actualizar este contacto en la hoja 04_Asistencia del Excel maestro.",
+    "descripcion": "Informar al responsable administrativo, Talento Humano, responsable de bienes o custodio institucional para el registro y seguimiento interno del evento.",
+    "condiciones": "Registrar el evento, respaldos y seguimiento administrativo correspondiente dentro de FIAS.",
     "mostrar_web": "SI",
-    "orden": 2
+    "orden": "2"
   }
 ]
