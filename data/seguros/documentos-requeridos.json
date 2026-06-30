@@ -1,0 +1,56 @@
+[
+  {
+    "id_documento": "DOC-001",
+    "documento": "Matrícula del vehículo",
+    "descripcion": "Documento vigente del bien asegurado.",
+    "obligatorio": "SI",
+    "aplica_a": "Todos",
+    "orden": 1,
+    "mostrar_web": "SI"
+  },
+  {
+    "id_documento": "DOC-002",
+    "documento": "Licencia del conductor",
+    "descripcion": "Licencia válida acorde al tipo de vehículo conducido.",
+    "obligatorio": "SI",
+    "aplica_a": "Todos",
+    "orden": 2,
+    "mostrar_web": "SI"
+  },
+  {
+    "id_documento": "DOC-003",
+    "documento": "Cédula del conductor",
+    "descripcion": "Documento de identificación del conductor o custodio.",
+    "obligatorio": "SI",
+    "aplica_a": "Todos",
+    "orden": 3,
+    "mostrar_web": "SI"
+  },
+  {
+    "id_documento": "DOC-004",
+    "documento": "Registro fotográfico o video",
+    "descripcion": "Evidencia del hecho, daños y contexto del siniestro.",
+    "obligatorio": "SI",
+    "aplica_a": "Siniestro",
+    "orden": 4,
+    "mostrar_web": "SI"
+  },
+  {
+    "id_documento": "DOC-005",
+    "documento": "Parte policial o denuncia",
+    "descripcion": "Aplica en siniestros con terceros, lesiones, robo o hurto.",
+    "obligatorio": "SEGUN_CASO",
+    "aplica_a": "Robo / Siniestro",
+    "orden": 5,
+    "mostrar_web": "SI"
+  },
+  {
+    "id_documento": "DOC-006",
+    "documento": "Informe interno FIAS",
+    "descripcion": "Reporte administrativo para control y seguimiento institucional.",
+    "obligatorio": "SI",
+    "aplica_a": "Todos",
+    "orden": 6,
+    "mostrar_web": "SI"
+  }
+]

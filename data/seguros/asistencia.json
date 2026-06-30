@@ -1,0 +1,26 @@
+[
+  {
+    "id_asistencia": "AST-001",
+    "proveedor": "Aseguradora del Sur",
+    "servicio": "Siniestros y averías",
+    "telefono_principal": "099 555 3333",
+    "telefono_secundario": "02 2997500",
+    "horario": "24/7",
+    "descripcion": "Notificar de inmediato el siniestro o avería para coordinar asistencia, grúa o wincha con el proveedor autorizado.",
+    "condiciones": "La asistencia debe gestionarse por los canales oficiales indicados por la aseguradora. No contratar proveedores externos sin autorización.",
+    "mostrar_web": "SI",
+    "orden": 1
+  },
+  {
+    "id_asistencia": "AST-002",
+    "proveedor": "FIAS",
+    "servicio": "Comunicación interna",
+    "telefono_principal": "Pendiente de definir",
+    "telefono_secundario": "",
+    "horario": "Horario institucional",
+    "descripcion": "Informar al responsable administrativo o custodio institucional para el registro y seguimiento interno del evento.",
+    "condiciones": "Actualizar este contacto en la hoja 04_Asistencia del Excel maestro.",
+    "mostrar_web": "SI",
+    "orden": 2
+  }
+]

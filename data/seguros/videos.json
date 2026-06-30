@@ -1,0 +1,22 @@
+[
+  {
+    "id_video": "VID-001",
+    "titulo": "¿Qué hacer en caso de siniestro?",
+    "descripcion": "Video informativo para custodios y conductores sobre los pasos inmediatos ante un accidente o avería.",
+    "archivo_repo": "assets/videos/asistencia-siniestro.mp4",
+    "miniatura_repo": "assets/img/thumb-siniestro.png",
+    "categoria": "Siniestro",
+    "orden": 1,
+    "mostrar_web": "SI"
+  },
+  {
+    "id_video": "VID-002",
+    "titulo": "Prevención y conducción segura",
+    "descripcion": "Recomendaciones para reducir riesgos durante traslados institucionales.",
+    "archivo_repo": "assets/videos/prevencion-conduccion.mp4",
+    "miniatura_repo": "assets/img/thumb-prevencion.png",
+    "categoria": "Prevención",
+    "orden": 2,
+    "mostrar_web": "SI"
+  }
+]
