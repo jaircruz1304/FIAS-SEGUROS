@@ -1,20 +1,12 @@
 {
-  "name": "fias-seguro-vehicular",
+  "name": "dashboard-seguros-vehiculares-fias",
   "version": "1.0.0",
   "private": true,
-  "description": "Landing dinámica de seguros vehiculares FIAS con sincronización desde OneDrive/SharePoint hacia JSON.",
   "type": "module",
   "scripts": {
-    "fetch": "node scripts/fetch-onedrive-excel.js",
-    "build:data": "node scripts/build-data.js",
-    "validate": "node scripts/validate-seguros.js",
-    "sync": "node scripts/fetch-onedrive-excel.js && node scripts/build-data.js && node scripts/validate-seguros.js"
+    "build:data": "node scripts/build-data.mjs"
   },
   "dependencies": {
-    "ajv": "^8.17.1",
     "xlsx": "^0.18.5"
-  },
-  "engines": {
-    "node": ">=20"
   }
 }
