@@ -2,7 +2,7 @@
   "meta": {
     "sistema": "FIAS Seguro Vehicular",
     "version": "1.0.0",
-    "ultima_actualizacion": "2026-06-30T22:17:24.904Z",
+    "ultima_actualizacion": "2026-07-01T12:59:49.223Z",
     "fuente": "OneDrive / SharePoint + GitHub Actions",
     "archivo_excel": "Base_Datos_Seguros_Vehiculares_FIAS.xlsx",
     "timezone": "America/Guayaquil"
@@ -46,7 +46,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201234",
@@ -78,7 +78,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201248",
@@ -110,7 +110,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201266",
@@ -142,7 +142,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201267",
@@ -174,7 +174,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201271",
@@ -206,7 +206,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201291",
@@ -238,7 +238,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205090",
@@ -270,7 +270,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205092",
@@ -302,7 +302,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205277",
@@ -334,7 +334,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205359",
@@ -366,7 +366,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205415",
@@ -398,7 +398,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205468",
@@ -430,7 +430,39 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
+    },
+    {
+      "id_poliza": "VO-0201299",
+      "poliza_numero": "201299",
+      "ramo": "VEHICULOS/MOTOS VO",
+      "documento": "POLIZA",
+      "anexo": "0",
+      "renovacion": "0",
+      "aseguradora": "ASEGURADORA DEL SUR C.A.",
+      "asegurado": "FONDO DE INVERSION AMBIENTAL SOSTENIBLE",
+      "ruc_asegurado": "1792807999001",
+      "emision": "2026-04-06",
+      "vig_desde": "2026-04-01",
+      "vig_hasta": "2027-01-01",
+      "plazo_dias": 275,
+      "suma_asegurada_poliza": 26739.93,
+      "prima": 805.84,
+      "scvs": 28.2,
+      "derechos_emision": 3,
+      "otros": 0,
+      "seguro_campesino": 4.03,
+      "iva": 126.16,
+      "total_pagado": 967.23,
+      "moneda": "USD",
+      "fecha_max_pago": "2026-04-21",
+      "estado_pago": "Pagado",
+      "reserva_proyecto": "PASNAP",
+      "pdf_nombre": "Póliza de 7 motocicletas Honda XR150L, vigencia 01/04/2026 al 01/01/2027. Suma asegurada total: USD 26.739,93.",
+      "observaciones": "",
+      "mostrar_web": "SI",
+      "estado": "VIGENTE",
+      "dias_restantes": 184
     }
   ],
   "bienes": [
@@ -965,6 +997,202 @@
       "ubicacion": "PARQUE NACIONAL MACHALILLA",
       "observaciones": "",
       "mostrar_web": "SI"
+    },
+    {
+      "id_bien": "KL306X",
+      "id_poliza": "VO-0201299",
+      "item": "1",
+      "placa": "KL306X",
+      "categoria": "Motocicleta",
+      "clase": "MOTOCICLETA",
+      "marca": "HONDA",
+      "modelo": "XR150L",
+      "anio": "2025",
+      "color": "BLANCO",
+      "codigo": "EB0080",
+      "chasis": "LTMKD1190S5313365",
+      "motor": "KD07E2714652",
+      "uso_vehiculo": "PARTICULAR",
+      "ocupantes": 1,
+      "dispositivo": "NINGUNO",
+      "reserva_proyecto": "POR DEFINIR",
+      "valor_asegurado": 3819.99,
+      "valor_accesorios": 0,
+      "total_asegurado": 3819.99,
+      "deducible": "Todo riesgo: 20% v.s., mínimo USD 200; pérdida total por choque o robo: 25% v.a.",
+      "estado_operativo": "Activo",
+      "responsable_custodio": "",
+      "ubicacion": "PASNAP",
+      "observaciones": "Responsabilidad civil: USD 3.000,00; muerte accidental: USD 1.000,00 por ocupante; gastos médicos: USD 500,00 por ocupante.",
+      "mostrar_web": "SI"
+    },
+    {
+      "id_bien": "KL280X",
+      "id_poliza": "VO-0201299",
+      "item": "2",
+      "placa": "KL280X",
+      "categoria": "Motocicleta",
+      "clase": "MOTOCICLETA",
+      "marca": "HONDA",
+      "modelo": "XR150L",
+      "anio": "2025",
+      "color": "BLANCO",
+      "codigo": "EB0080",
+      "chasis": "LTMKD1198S5313372",
+      "motor": "KD07E2714645",
+      "uso_vehiculo": "PARTICULAR",
+      "ocupantes": 1,
+      "dispositivo": "NINGUNO",
+      "reserva_proyecto": "POR DEFINIR",
+      "valor_asegurado": 3819.99,
+      "valor_accesorios": 0,
+      "total_asegurado": 3819.99,
+      "deducible": "Todo riesgo: 20% v.s., mínimo USD 200; pérdida total por choque o robo: 25% v.a.",
+      "estado_operativo": "Activo",
+      "responsable_custodio": "",
+      "ubicacion": "PASNAP",
+      "observaciones": "Responsabilidad civil: USD 3.000,00; muerte accidental: USD 1.000,00 por ocupante; gastos médicos: USD 500,00 por ocupante.",
+      "mostrar_web": "SI"
+    },
+    {
+      "id_bien": "KL287X",
+      "id_poliza": "VO-0201299",
+      "item": "3",
+      "placa": "KL287X",
+      "categoria": "Motocicleta",
+      "clase": "MOTOCICLETA",
+      "marca": "HONDA",
+      "modelo": "XR150L",
+      "anio": "2025",
+      "color": "BLANCO",
+      "codigo": "EB0080",
+      "chasis": "LTMKD1194S5313367",
+      "motor": "KD07E2714650",
+      "uso_vehiculo": "PARTICULAR",
+      "ocupantes": 1,
+      "dispositivo": "NINGUNO",
+      "reserva_proyecto": "POR DEFINIR",
+      "valor_asegurado": 3819.99,
+      "valor_accesorios": 0,
+      "total_asegurado": 3819.99,
+      "deducible": "Todo riesgo: 20% v.s., mínimo USD 200; pérdida total por choque o robo: 25% v.a.",
+      "estado_operativo": "Activo",
+      "responsable_custodio": "",
+      "ubicacion": "PASNAP",
+      "observaciones": "Responsabilidad civil: USD 3.000,00; muerte accidental: USD 1.000,00 por ocupante; gastos médicos: USD 500,00 por ocupante.",
+      "mostrar_web": "SI"
+    },
+    {
+      "id_bien": "KL284X",
+      "id_poliza": "VO-0201299",
+      "item": "4",
+      "placa": "KL284X",
+      "categoria": "Motocicleta",
+      "clase": "MOTOCICLETA",
+      "marca": "HONDA",
+      "modelo": "XR150L",
+      "anio": "2025",
+      "color": "BLANCO",
+      "codigo": "EB0080",
+      "chasis": "LTMKD1191S5313360",
+      "motor": "KD07E2714656",
+      "uso_vehiculo": "PARTICULAR",
+      "ocupantes": 1,
+      "dispositivo": "NINGUNO",
+      "reserva_proyecto": "POR DEFINIR",
+      "valor_asegurado": 3819.99,
+      "valor_accesorios": 0,
+      "total_asegurado": 3819.99,
+      "deducible": "Todo riesgo: 20% v.s., mínimo USD 200; pérdida total por choque o robo: 25% v.a.",
+      "estado_operativo": "Activo",
+      "responsable_custodio": "",
+      "ubicacion": "PASNAP",
+      "observaciones": "Responsabilidad civil: USD 3.000,00; muerte accidental: USD 1.000,00 por ocupante; gastos médicos: USD 500,00 por ocupante.",
+      "mostrar_web": "SI"
+    },
+    {
+      "id_bien": "KL290X",
+      "id_poliza": "VO-0201299",
+      "item": "5",
+      "placa": "KL290X",
+      "categoria": "Motocicleta",
+      "clase": "MOTOCICLETA",
+      "marca": "HONDA",
+      "modelo": "XR150L",
+      "anio": "2025",
+      "color": "BLANCO",
+      "codigo": "EB0080",
+      "chasis": "LTMKD1196S5313368",
+      "motor": "KD07E2714648",
+      "uso_vehiculo": "PARTICULAR",
+      "ocupantes": 1,
+      "dispositivo": "NINGUNO",
+      "reserva_proyecto": "POR DEFINIR",
+      "valor_asegurado": 3819.99,
+      "valor_accesorios": 0,
+      "total_asegurado": 3819.99,
+      "deducible": "Todo riesgo: 20% v.s., mínimo USD 200; pérdida total por choque o robo: 25% v.a.",
+      "estado_operativo": "Activo",
+      "responsable_custodio": "",
+      "ubicacion": "PASNAP",
+      "observaciones": "Responsabilidad civil: USD 3.000,00; muerte accidental: USD 1.000,00 por ocupante; gastos médicos: USD 500,00 por ocupante.",
+      "mostrar_web": "SI"
+    },
+    {
+      "id_bien": "KL295X",
+      "id_poliza": "VO-0201299",
+      "item": "6",
+      "placa": "KL295X",
+      "categoria": "Motocicleta",
+      "clase": "MOTOCICLETA",
+      "marca": "HONDA",
+      "modelo": "XR150L",
+      "anio": "2025",
+      "color": "BLANCO",
+      "codigo": "EB0080",
+      "chasis": "LTMKD1195S5313359",
+      "motor": "KD07E2714657",
+      "uso_vehiculo": "PARTICULAR",
+      "ocupantes": 1,
+      "dispositivo": "NINGUNO",
+      "reserva_proyecto": "POR DEFINIR",
+      "valor_asegurado": 3819.99,
+      "valor_accesorios": 0,
+      "total_asegurado": 3819.99,
+      "deducible": "Todo riesgo: 20% v.s., mínimo USD 200; pérdida total por choque o robo: 25% v.a.",
+      "estado_operativo": "Activo",
+      "responsable_custodio": "",
+      "ubicacion": "PASNAP",
+      "observaciones": "Responsabilidad civil: USD 3.000,00; muerte accidental: USD 1.000,00 por ocupante; gastos médicos: USD 500,00 por ocupante.",
+      "mostrar_web": "SI"
+    },
+    {
+      "id_bien": "KL293X",
+      "id_poliza": "VO-0201299",
+      "item": "7",
+      "placa": "KL293X",
+      "categoria": "Motocicleta",
+      "clase": "MOTOCICLETA",
+      "marca": "HONDA",
+      "modelo": "XR150L",
+      "anio": "2025",
+      "color": "BLANCO",
+      "codigo": "EB0080",
+      "chasis": "LTMKD1195S5313376",
+      "motor": "KD07E2714641",
+      "uso_vehiculo": "PARTICULAR",
+      "ocupantes": 1,
+      "dispositivo": "NINGUNO",
+      "reserva_proyecto": "POR DEFINIR",
+      "valor_asegurado": 3819.99,
+      "valor_accesorios": 0,
+      "total_asegurado": 3819.99,
+      "deducible": "Todo riesgo: 20% v.s., mínimo USD 200; pérdida total por choque o robo: 25% v.a.",
+      "estado_operativo": "Activo",
+      "responsable_custodio": "",
+      "ubicacion": "PASNAP",
+      "observaciones": "Responsabilidad civil: USD 3.000,00; muerte accidental: USD 1.000,00 por ocupante; gastos médicos: USD 500,00 por ocupante.",
+      "mostrar_web": "SI"
     }
   ],
   "coberturas": [
@@ -1045,10 +1273,10 @@
     {
       "id_asistencia": "AST-002",
       "proveedor": "FIAS",
-      "servicio": "Comunicación interna",
-      "telefono_principal": "Pendiente de definir",
+      "servicio": "Comunicación interna/Direccion Administrativa y TTHH",
+      "telefono_principal": "+593998017925",
       "telefono_secundario": "",
-      "horario": "Horario institucional",
+      "horario": "08:30 a 17:30(EC)",
       "descripcion": "Informar al responsable administrativo, Talento Humano, responsable de bienes o custodio institucional para el registro y seguimiento interno del evento.",
       "condiciones": "Registrar el evento, respaldos y seguimiento administrativo correspondiente dentro de FIAS.",
       "mostrar_web": "SI",
@@ -1197,14 +1425,6 @@
       "categoria": "Asistencia",
       "orden": "3",
       "mostrar_web": "SI"
-    },
-    {
-      "id_faq": "FAQ-004",
-      "pregunta": "¿Dónde se actualizan los datos de la web?",
-      "respuesta": "La información se edita en el Excel maestro de OneDrive. GitHub Actions sincroniza el archivo y genera los JSON que consume la web.",
-      "categoria": "Sistema",
-      "orden": "4",
-      "mostrar_web": "SI"
     }
   ],
   "videos": [
@@ -1288,16 +1508,16 @@
     }
   ],
   "kpis": {
-    "total_polizas": 13,
-    "total_bienes": 19,
+    "total_polizas": 14,
+    "total_bienes": 26,
     "total_motos": 11,
     "total_camionetas": 5,
     "total_jeep_suv": 2,
     "total_cuadrones": 1,
-    "total_suma_asegurada": 227612.19,
-    "total_valor_bienes": 227612.19,
-    "total_primas": 7713.81,
-    "vigentes": 13,
+    "total_suma_asegurada": 254352.12,
+    "total_valor_bienes": 254352.12,
+    "total_primas": 8681.04,
+    "vigentes": 14,
     "por_vencer": 0,
     "vencidas": 0,
     "sin_fecha": 0,
@@ -1305,7 +1525,8 @@
       "Moto": 11,
       "Cuadrón": 1,
       "Jeep/SUV": 2,
-      "Camioneta": 5
+      "Camioneta": 5,
+      "Motocicleta": 7
     }
   }
 }
