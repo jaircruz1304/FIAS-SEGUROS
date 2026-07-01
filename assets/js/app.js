@@ -125,23 +125,17 @@ function renderCoverages(rows = []) {
     }));
 
   if (!visible.length) {
-    $("coverageSummary").innerHTML = emptyCardState("Coberturas pendientes de sincronización", "La sección se llenará únicamente con los datos de la hoja 03_Coberturas del Excel maestro.");
-    $("coverageAccordion").innerHTML = "";
+    $("coverageSummary").innerHTML = "";
+    $("coverageAccordion").innerHTML = emptyCardState("Coberturas pendientes de sincronización", "Cuando se actualice la matriz se mostrarán las coberturas registradas.");
     return;
   }
 
-  $("coverageSummary").innerHTML = visible.slice(0, 8).map(r => `
-    <article class="coverage-card">
-      <span class="coverage-icon">${coverageIcon(r.nombre_cobertura + " " + r.tipo_cobertura)}</span>
-      <h3>${esc(r.tipo_cobertura)}</h3>
-      <p>${esc(r.nombre_cobertura)}</p>
-    </article>
-  `).join("");
+  $("coverageSummary").innerHTML = "";
 
   $("coverageAccordion").innerHTML = visible.map((r, index) => {
     const limit = clean(r.limite_usd) ? `<span><b>Límite:</b> ${money.format(+r.limite_usd || 0)}</span>` : "";
     const deductible = clean(r.deducible) ? `<span><b>Deducible:</b> ${esc(r.deducible)}</span>` : "";
-    return `<details class="accordion-item" ${index === 0 ? "open" : ""}>
+    return `<details class="accordion-item coverage-clean-item" ${index === 0 ? "open" : ""}>
       <summary>
         <span class="accordion-icon">${coverageIcon(r.nombre_cobertura + " " + r.tipo_cobertura)}</span>
         <span>
@@ -151,11 +145,7 @@ function renderCoverages(rows = []) {
       </summary>
       <div class="accordion-body">
         <p>${esc(r.descripcion)}</p>
-        <div class="coverage-meta">
-          ${limit}
-          ${deductible}
-          <span><b>Nota:</b> Aplicación sujeta a condiciones particulares, exclusiones, deducibles y documentación de respaldo.</span>
-        </div>
+        ${(limit || deductible) ? `<div class="coverage-meta">${limit}${deductible}</div>` : ""}
       </div>
     </details>`;
   }).join("");
@@ -357,7 +347,7 @@ function renderVideos(rows = []) {
         <p>${safe(r.descripcion)}</p>
       </div>
     </article>`;
-  }).join("") || emptyCardState("Videos pendientes de sincronización", "Carga los archivos MP4 en assets/videos/ y registra sus rutas en la hoja 08_Videos.");
+  }).join("") || emptyCardState("Videos pendientes de sincronización", "Cuando se actualice la información se mostrarán los videos registrados.");
 }
 
 async function init() {
