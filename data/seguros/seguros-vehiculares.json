@@ -2,7 +2,7 @@
   "meta": {
     "sistema": "FIAS Seguro Vehicular",
     "version": "1.0.0",
-    "ultima_actualizacion": "2026-07-01T20:56:09.044Z",
+    "ultima_actualizacion": "2026-07-01T21:05:57.424Z",
     "fuente": "OneDrive / SharePoint + GitHub Actions",
     "archivo_excel": "Base_Datos_Seguros_Vehiculares_FIAS.xlsx",
     "timezone": "America/Guayaquil"
@@ -1543,16 +1543,26 @@
       "activo": "SI"
     }
   ],
+  "riesgos_no_vehiculares": [],
   "kpis": {
     "total_polizas": 14,
+    "ramos_cubiertos": 2,
+    "ramos_lista": [
+      "VEHICULOS/MOTOS VO",
+      "VP BIZ"
+    ],
     "total_bienes": 26,
+    "total_riesgos_no_vehiculares": 0,
     "total_motos": 18,
     "total_camionetas": 5,
     "total_jeep_suv": 2,
     "total_cuadrones": 1,
     "total_suma_asegurada": 254352.12,
     "total_valor_bienes": 254352.12,
+    "diferencia_polizas_bienes": 0,
     "total_primas": 8681.04,
+    "vigencia_principal_hasta": "2027-01-01",
+    "cobertura_anual": "2026-01-01 a 2027-01-01",
     "vigentes": 14,
     "por_vencer": 0,
     "vencidas": 0,
