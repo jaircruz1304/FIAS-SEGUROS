@@ -1,8 +1,8 @@
 {
-  "sistema": "FIAS Seguro Vehicular y Pólizas",
-  "version": "2.0.0",
-  "ultima_actualizacion": "2026-07-01T18:42:54-05:00",
-  "fuente": "Pólizas PDF cargadas / Matriz OneDrive",
-  "archivo_excel": "Base_Datos_Seguros_FIAS_ACTUALIZADA.xlsx",
-  "nota": "Datos extraídos de las pólizas cargadas en la conversación."
+  "sistema": "FIAS Seguro Vehicular",
+  "version": "1.0.0",
+  "ultima_actualizacion": "2026-07-01T20:56:09.044Z",
+  "fuente": "OneDrive / SharePoint + GitHub Actions",
+  "archivo_excel": "Base_Datos_Seguros_Vehiculares_FIAS.xlsx",
+  "timezone": "America/Guayaquil"
 }
