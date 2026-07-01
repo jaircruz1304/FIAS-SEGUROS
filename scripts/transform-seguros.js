@@ -26,7 +26,7 @@ function rows(workbook, sheetName) {
 }
 
 function normalizePolizas(rows) {
-  return rows.filter(visible).map(r => {
+  return rows.filter(r => visible(r) && normalizeText(r.id_poliza).length > 0).map(r => {
     const vigHasta = excelDateToISO(r.vig_hasta);
     const st = statusFor(vigHasta);
     return {
@@ -65,7 +65,7 @@ function normalizePolizas(rows) {
 }
 
 function normalizeBienes(rows) {
-  return rows.filter(visible).map(r => ({
+  return rows.filter(r => visible(r) && normalizeText(r.id_poliza).length > 0 && normalizeText(r.id_bien || r.placa).length > 0).map(r => ({
     id_bien: normalizeText(r.id_bien || r.placa),
     id_poliza: normalizeText(r.id_poliza),
     item: normalizeText(r.item),
@@ -124,7 +124,7 @@ function calcKpis(polizas, bienes) {
   return {
     total_polizas: polizas.length,
     total_bienes: bienes.length,
-    total_motos: categories["Moto"] || 0,
+    total_motos: categories["Motocicleta"] || categories["Moto"] || 0,
     total_camionetas: categories["Camioneta"] || 0,
     total_jeep_suv: categories["Jeep/SUV"] || 0,
     total_cuadrones: categories["Cuadrón"] || 0,
