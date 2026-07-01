@@ -6,7 +6,7 @@
   <meta name="description" content="FIAS Seguro Vehicular: pólizas vigentes, bienes asegurados, asistencia y procedimientos ante siniestros." />
   <title>FIAS | Seguro Vehicular</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
-<script type="text/javascript" src="https://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=-yzc9jvlOgbm4J2wCxO12a20JhfPMAD_9vykMR0TnDEvwIIFCiD69E77N1ZekhfHmY0qBdLwqMAvyxI9wz_LqW8mKqv9qRUejI_UcbYLAhGegUVL2TYVTqomT9qdpRK2T4NVDY8S6kF4qxHhtNa31udiAmfYRxHDxPj9rdUi864gRqvtX7IR2BotVr3lHWlJ1M_OjXcAHTV87880NUtrAq5yIta-TR1_Wj4ljlMtjgm76xt7vJPfU03S2l8KSrOIUV1fHJlPLlQAqh88lBie_pPD8ZOnM0PgyZ-aXRmHd_iPUccPSKnXEvyY41Hh59NmpwUzKLinenrz9GMcJFjVyw" charset="UTF-8"></script></head>
+</head>
 <body>
   <header class="topbar">
     <nav class="nav" aria-label="Navegación principal">
@@ -42,19 +42,12 @@
         </div>
 
         <div class="hero-visual hero-video-visual" aria-label="Video informativo: qué hacer en caso de siniestro">
-          <div class="hero-video-phone phone-frame">
-            <div class="phone-side phone-side-left"></div>
-            <div class="phone-side phone-side-right"></div>
-            <div class="phone-inner">
-              <div class="phone-speaker"></div>
-              <div class="phone-camera"></div>
-              <div class="phone-screen-video hero-phone-screen">
-                <video id="heroVideo" class="phone-video hero-phone-video" autoplay muted loop playsinline controls preload="metadata" poster="assets/img/thumb-siniestro.png" aria-label="¿Qué hacer en caso de siniestro?">
-                  <source id="heroVideoSource" src="assets/videos/asistencia-siniestro.mp4" type="video/mp4">
-                  Tu navegador no puede reproducir este video.
-                </video>
-              </div>
-            </div>
+          <div class="hero-video-phone phone-image-frame">
+            <video id="heroVideo" class="phone-frame-video hero-phone-video" autoplay muted loop playsinline controls preload="metadata" poster="assets/img/thumb-siniestro.png" aria-label="¿Qué hacer en caso de siniestro?">
+              <source id="heroVideoSource" src="assets/videos/asistencia-siniestro.mp4" type="video/mp4">
+              Tu navegador no puede reproducir este video.
+            </video>
+            <img class="phone-frame-img" src="assets/img/phone-frame-video.png" alt="" aria-hidden="true">
           </div>
           <div class="road hero-road"></div>
         </div>
@@ -97,11 +90,10 @@
           <span class="section-icon">🛡️</span>
           <div>
             <h2>Daños y coberturas</h2>
-            <p>Conoce los principales eventos que pueden estar amparados por las pólizas vigentes.</p>
+            <p>Consulta las coberturas registradas en las pólizas vigentes.</p>
           </div>
         </div>
-        <div id="coverageSummary" class="coverage-summary"></div>
-        <div id="coverageAccordion" class="accordion-list"></div>
+<div id="coverageAccordion" class="accordion-list"></div>
       </div>
     </section>
 

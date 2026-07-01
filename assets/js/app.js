@@ -125,16 +125,21 @@ function renderCoverages(rows = []) {
     }));
 
   if (!visible.length) {
-    $("coverageSummary").innerHTML = "";
-    $("coverageAccordion").innerHTML = emptyCardState("Coberturas pendientes de sincronización", "Cuando se actualice la matriz se mostrarán las coberturas registradas.");
+    $("coverageAccordion").innerHTML = emptyCardState(
+      "Coberturas pendientes de sincronización",
+      "Cuando se actualice la matriz se mostrarán las coberturas registradas."
+    );
     return;
   }
 
-  $("coverageSummary").innerHTML = "";
-
   $("coverageAccordion").innerHTML = visible.map((r, index) => {
-    const limit = clean(r.limite_usd) ? `<span><b>Límite:</b> ${money.format(+r.limite_usd || 0)}</span>` : "";
-    const deductible = clean(r.deducible) ? `<span><b>Deducible:</b> ${esc(r.deducible)}</span>` : "";
+    const limit = clean(r.limite_usd)
+      ? `<span><b>Límite:</b> ${money.format(+r.limite_usd || 0)}</span>`
+      : "";
+    const deductible = clean(r.deducible)
+      ? `<span><b>Deducible:</b> ${esc(r.deducible)}</span>`
+      : "";
+
     return `<details class="accordion-item coverage-clean-item" ${index === 0 ? "open" : ""}>
       <summary>
         <span class="accordion-icon">${coverageIcon(r.nombre_cobertura + " " + r.tipo_cobertura)}</span>
@@ -325,21 +330,16 @@ function renderVideos(rows = []) {
     const poster = clean(r.miniatura_repo);
     const posterAttr = poster ? ` poster="${esc(poster)}"` : "";
     const media = videoSrc
-      ? `<video class="phone-video" controls playsinline preload="metadata"${posterAttr} aria-label="${esc(r.titulo)}">
+      ? `<video class="phone-frame-video" controls playsinline preload="metadata"${posterAttr} aria-label="${esc(r.titulo)}">
           <source src="${esc(videoSrc)}" type="video/mp4">
           Tu navegador no puede reproducir este video.
         </video>`
-      : `<div class="phone-video-placeholder"><strong>▶</strong><span>Agrega el archivo MP4 en assets/videos/</span></div>`;
+      : `<div class="phone-frame-video phone-video-placeholder"><strong>▶</strong><span>Video pendiente</span></div>`;
 
     return `<article class="video-phone-card">
-      <div class="phone-frame" aria-label="Video en formato teléfono">
-        <div class="phone-side phone-side-left"></div>
-        <div class="phone-side phone-side-right"></div>
-        <div class="phone-inner">
-          <div class="phone-speaker"></div>
-          <div class="phone-camera"></div>
-          <div class="phone-screen-video">${media}</div>
-        </div>
+      <div class="phone-image-frame video-list-phone" aria-label="Video en formato teléfono">
+        ${media}
+        <img class="phone-frame-img" src="assets/img/phone-frame-video.png" alt="" aria-hidden="true">
       </div>
       <div class="video-caption">
         <span class="video-pill">${index + 1 < 10 ? `0${index + 1}` : index + 1} · ${safe(r.categoria || "Video informativo")}</span>
