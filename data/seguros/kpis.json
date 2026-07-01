@@ -1,21 +1,10 @@
 {
-  "total_polizas": 13,
-  "total_bienes": 19,
-  "total_motos": 11,
-  "total_camionetas": 5,
-  "total_jeep_suv": 2,
-  "total_cuadrones": 1,
-  "total_suma_asegurada": 227612.19,
-  "total_valor_bienes": 227612.19,
-  "total_primas": 7713.81,
-  "vigentes": 13,
-  "por_vencer": 0,
-  "vencidas": 0,
-  "sin_fecha": 0,
-  "categorias": {
-    "Moto": 11,
-    "Cuadrón": 1,
-    "Jeep/SUV": 2,
-    "Camioneta": 5
-  }
+  "total_polizas": 0,
+  "total_bienes": 0,
+  "total_motos": 0,
+  "total_camionetas": 0,
+  "total_jeep_suv": 0,
+  "total_suma_asegurada": 0,
+  "total_primas": 0,
+  "por_vencer": 0
 }

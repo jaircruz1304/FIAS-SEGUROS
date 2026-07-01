@@ -658,142 +658,120 @@ a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));m
   }
 }
 
-
-
 /* =========================================================
-   MEJORA DE UX: SECCIONES COMPACTAS, COLAPSABLES Y COBERTURAS
+   UX FINAL: PÁGINA COMPACTA SIN DATA AUXILIAR
    ========================================================= */
-.collapsible-panel{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:26px;
-  box-shadow:var(--shadow2);
-  overflow:hidden;
+.section{
+  padding:72px 0;
 }
-.collapsible-panel > summary{
-  list-style:none;
-  cursor:pointer;
-  display:flex;
+.section.soft{
+  background:linear-gradient(180deg,#f4fbf7 0%,#eef8f2 100%);
+}
+.assistance-layout{
   align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  padding:20px 24px;
-  color:#1f2933;
-  font-weight:950;
 }
-.collapsible-panel > summary::-webkit-details-marker{display:none}
-.collapsible-panel > summary:after{
-  content:"＋";
-  width:34px;
-  height:34px;
-  border-radius:999px;
-  display:grid;
-  place-items:center;
-  background:var(--soft);
-  color:var(--green);
-  font-weight:1000;
-  flex:0 0 auto;
+.compact-scene{
+  min-height:360px;
 }
-.collapsible-panel[open] > summary:after{content:"−"}
-.collapsible-panel > summary span{
-  font-size:1.12rem;
+.compact-scene .emergency-illustration{
+  transform:scale(.85);
 }
-.collapsible-panel > summary small{
-  display:block;
-  margin-top:4px;
-  color:var(--muted);
-  font-size:.88rem;
-  line-height:1.35;
-  font-weight:750;
-}
-.panel-body{
-  padding:0 24px 24px;
-}
-.data-panel + .data-panel{margin-top:18px}
-
 .coverage-summary{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-  margin-bottom:20px;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:22px;
 }
 .coverage-card{
   background:#fff;
   border:1px solid var(--line);
-  border-radius:24px;
-  padding:20px;
-  box-shadow:var(--shadow2);
-  min-height:150px;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 14px 30px rgba(15,23,42,.07);
+  min-height:142px;
 }
 .coverage-icon{
+  width:48px;
+  height:48px;
   display:grid;
   place-items:center;
-  width:52px;
-  height:52px;
-  border-radius:18px;
+  border-radius:16px;
   background:var(--soft);
-  font-size:1.55rem;
-  margin-bottom:14px;
+  font-size:1.45rem;
+  margin-bottom:12px;
 }
 .coverage-card h3{
   margin:0 0 8px;
   color:var(--green);
-  font-size:1.15rem;
+  font-size:1rem;
+  line-height:1.2;
 }
 .coverage-card p{
   margin:0;
   color:#4b5563;
-  line-height:1.45;
-  font-weight:760;
+  line-height:1.35;
+  font-weight:750;
+  font-size:.92rem;
 }
 .accordion-list{
   display:grid;
   gap:12px;
 }
-.accordion-item{
+.accordion-item,
+.collapsible-panel{
   background:#fff;
   border:1px solid var(--line);
   border-radius:20px;
-  box-shadow:0 10px 24px rgba(15,23,42,.06);
   overflow:hidden;
+  box-shadow:0 12px 30px rgba(15,23,42,.06);
 }
-.accordion-item > summary{
+.accordion-item > summary,
+.collapsible-panel > summary{
   list-style:none;
   cursor:pointer;
   display:flex;
   align-items:center;
   gap:14px;
-  padding:16px 18px;
+  padding:17px 18px;
 }
-.accordion-item > summary::-webkit-details-marker{display:none}
-.accordion-item > summary:after{
+.accordion-item > summary::-webkit-details-marker,
+.collapsible-panel > summary::-webkit-details-marker{
+  display:none;
+}
+.accordion-item > summary:after,
+.collapsible-panel > summary:after{
   content:"⌄";
   margin-left:auto;
   color:var(--green);
   font-weight:1000;
-  font-size:1.2rem;
+  font-size:1.25rem;
   transition:.18s ease;
 }
-.accordion-item[open] > summary:after{transform:rotate(180deg)}
+.accordion-item[open] > summary:after,
+.collapsible-panel[open] > summary:after{
+  transform:rotate(180deg);
+}
 .accordion-icon{
   width:44px;
   height:44px;
   display:grid;
   place-items:center;
-  border-radius:16px;
+  border-radius:15px;
   background:var(--soft);
-  flex:0 0 auto;
   font-size:1.35rem;
+  flex:0 0 auto;
 }
-.accordion-item b{
+.accordion-item b,
+.collapsible-panel b{
   color:#1f2933;
 }
-.accordion-item small{
+.accordion-item small,
+.collapsible-panel small{
   display:block;
-  margin-top:4px;
   color:var(--muted);
-  font-weight:750;
   line-height:1.35;
+  font-weight:750;
+  margin-top:4px;
 }
 .accordion-body{
   border-top:1px solid var(--line);
@@ -820,11 +798,12 @@ a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));m
   font-size:.82rem;
   font-weight:780;
 }
-
-/* Procedimiento en formato desplegable */
-.steps.compact-steps,
-.steps{
-  gap:12px;
+.panel-body{
+  padding:0 20px 22px;
+}
+.compact-steps{
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
 }
 .step-detail{
   min-height:0;
@@ -834,20 +813,44 @@ a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));m
 .step-detail summary{
   list-style:none;
   cursor:pointer;
-  padding:18px;
   display:grid;
   grid-template-columns:auto 1fr auto;
   gap:14px;
   align-items:center;
+  padding:18px;
 }
-.step-detail summary::-webkit-details-marker{display:none}
+.step-detail summary::-webkit-details-marker{
+  display:none;
+}
+.step-detail .step-icon-wrap{
+  width:54px;
+  height:54px;
+  border-radius:17px;
+  display:grid;
+  place-items:center;
+  background:var(--soft);
+  font-size:1.55rem;
+}
 .step-title-wrap h3{
-  margin:4px 0 0;
+  margin:3px 0 0;
   font-size:1.05rem;
+  line-height:1.25;
+}
+.step-number{
+  display:inline-flex;
+  color:var(--green);
+  background:rgba(11,138,85,.09);
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:.72rem;
+  font-weight:950;
+}
+.step-kind{
+  white-space:nowrap;
 }
 .step-body{
   border-top:1px solid var(--line);
-  padding:0 18px 18px 100px;
+  padding:0 18px 18px 86px;
 }
 .step-body p{
   margin:0;
@@ -855,8 +858,6 @@ a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));m
   line-height:1.55;
   font-weight:760;
 }
-
-/* Tablas y tarjetas compactas */
 .compact-table table th,
 .compact-table table td{
   padding:14px 16px;
@@ -876,7 +877,7 @@ a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));m
   border:1px solid rgba(11,138,85,.12);
 }
 .compact-cards{
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(3,1fr);
 }
 .vehicle-detail-card{
   padding:0;
@@ -886,7 +887,9 @@ a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));m
   cursor:pointer;
   padding:20px;
 }
-.vehicle-detail-card > summary::-webkit-details-marker{display:none}
+.vehicle-detail-card > summary::-webkit-details-marker{
+  display:none;
+}
 .vehicle-detail-card > summary:after{
   content:"Ver detalle";
   display:inline-flex;
@@ -899,34 +902,68 @@ a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));m
 }
 .vehicle-detail-card .detail-grid{
   padding:0 20px 20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
-
-.compact-accordion-item{
+.compact-list .accordion-item{
   margin-bottom:10px;
 }
-.info-panel .panel-body{
-  padding-top:4px;
+.empty-state{
+  background:#f8fffb;
+  border:1px dashed rgba(11,138,85,.35);
+  color:#0f6f49;
+  border-radius:20px;
+  padding:18px 20px;
+  font-weight:800;
+  line-height:1.5;
 }
-
+.empty-state strong{
+  display:block;
+  color:#0b8a55;
+  font-size:1.05rem;
+  margin-bottom:4px;
+}
+.empty-row td{
+  background:#f8fffb;
+  color:#0f6f49;
+}
+.empty-row .empty-state{
+  border:0;
+  padding:8px 0;
+  background:transparent;
+}
+@media (max-width:1180px){
+  .coverage-summary{grid-template-columns:repeat(3,1fr)}
+  .compact-cards{grid-template-columns:repeat(2,1fr)}
+}
 @media (max-width:980px){
-  .coverage-summary{grid-template-columns:repeat(2,1fr)}
-  .compact-cards{grid-template-columns:1fr}
+  .coverage-summary,
+  .compact-steps,
+  .compact-cards{
+    grid-template-columns:1fr 1fr;
+  }
 }
 @media (max-width:640px){
-  .collapsible-panel > summary{
-    align-items:flex-start;
-    padding:18px;
+  .coverage-summary,
+  .compact-steps,
+  .compact-cards{
+    grid-template-columns:1fr;
   }
-  .coverage-summary{grid-template-columns:1fr}
-  .accordion-body{padding:14px 16px}
+  .accordion-body{
+    padding:14px 16px;
+  }
   .step-detail summary{
     grid-template-columns:auto 1fr;
   }
-  .step-detail .step-kind{
+  .step-kind{
     grid-column:2;
     justify-self:start;
   }
   .step-body{
     padding:0 18px 18px;
+  }
+  .vehicle-detail-card .detail-grid{
+    grid-template-columns:1fr;
   }
 }
