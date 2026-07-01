@@ -17,6 +17,7 @@
       <button class="menu-button" id="menuButton" aria-label="Abrir menú">☰</button>
       <div class="navlinks" id="navLinks">
         <a href="#asistencia">Asistencia</a>
+        <a href="#coberturas">Coberturas</a>
         <a href="#procedimiento">Siniestro</a>
         <a href="#polizas">Pólizas</a>
         <a href="#vehiculos">Vehículos</a>
@@ -93,7 +94,22 @@
       </div>
     </section>
 
-    <section class="section soft" id="procedimiento">
+
+    <section class="section soft" id="coberturas">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-icon">🛡️</span>
+          <div>
+            <h2>Daños y coberturas principales</h2>
+            <p>Resumen práctico de los eventos cubiertos por las pólizas. La aplicación depende de las condiciones particulares, deducibles y exclusiones de cada póliza.</p>
+          </div>
+        </div>
+        <div id="coverageSummary" class="coverage-summary"></div>
+        <div id="coverageAccordion" class="accordion-list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="procedimiento">
       <div class="wrap">
         <div class="section-head">
           <span class="section-icon">🛡️</span>
@@ -106,37 +122,46 @@
       </div>
     </section>
 
+
     <section class="section" id="polizas">
       <div class="wrap">
         <div class="section-head">
           <span class="section-icon">📄</span>
           <div>
             <h2>Pólizas vigentes</h2>
-            <p>Consulta de pólizas, vigencias, valores asegurados y estado de cobertura.</p>
+            <p>Consulta únicamente cuando necesites revisar vigencias, valores o estado de cobertura.</p>
           </div>
         </div>
-        <div class="toolbar">
-          <input id="policySearch" type="search" placeholder="Buscar póliza, reserva, aseguradora..." />
-          <select id="policyStatus"><option value="">Todos los estados</option></select>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Póliza</th>
-                <th>Aseguradora</th>
-                <th>Vigencia</th>
-                <th>Reserva / Proyecto</th>
-                <th>Suma asegurada</th>
-                <th>Total pagado</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody id="policyTable"></tbody>
-          </table>
-        </div>
+        <details class="collapsible-panel data-panel">
+          <summary>
+            <span>Consultar pólizas registradas</span>
+            <small>Despliega esta sección para buscar por número de póliza, reserva, aseguradora o estado.</small>
+          </summary>
+          <div class="panel-body">
+            <div class="toolbar">
+              <input id="policySearch" type="search" placeholder="Buscar póliza, reserva, aseguradora..." />
+              <select id="policyStatus"><option value="">Todos los estados</option></select>
+            </div>
+            <div class="table-wrap compact-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Póliza</th>
+                    <th>Vigencia</th>
+                    <th>Suma asegurada</th>
+                    <th>Estado</th>
+                    <th>Detalle</th>
+                  </tr>
+                </thead>
+                <tbody id="policyTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </details>
       </div>
     </section>
+
+
 
     <section class="section soft" id="vehiculos">
       <div class="wrap">
@@ -144,16 +169,26 @@
           <span class="section-icon">🚙</span>
           <div>
             <h2>Bienes asegurados</h2>
-            <p>Consulta por placa, vehículo, moto o cuadrón.</p>
+            <p>Listado resumido por placa. Despliega cada tarjeta solo cuando necesites revisar el detalle.</p>
           </div>
         </div>
-        <div class="toolbar">
-          <input id="vehicleSearch" type="search" placeholder="Buscar placa, marca, modelo, reserva..." />
-          <select id="categoryFilter"><option value="">Todas las categorías</option></select>
-        </div>
-        <div id="vehicleCards" class="cards"></div>
+        <details class="collapsible-panel data-panel">
+          <summary>
+            <span>Consultar vehículos, motos y bienes asegurados</span>
+            <small>Filtra por placa, marca, modelo, reserva o categoría.</small>
+          </summary>
+          <div class="panel-body">
+            <div class="toolbar">
+              <input id="vehicleSearch" type="search" placeholder="Buscar placa, marca, modelo, reserva..." />
+              <select id="categoryFilter"><option value="">Todas las categorías</option></select>
+            </div>
+            <div id="vehicleCards" class="cards compact-cards"></div>
+          </div>
+        </details>
       </div>
     </section>
+
+
 
     <section class="section" id="videos">
       <div class="wrap">
@@ -164,28 +199,43 @@
             <p>Material audiovisual de apoyo para custodios y conductores.</p>
           </div>
         </div>
-        <div class="videos" id="videoGrid"></div>
+        <details class="collapsible-panel media-panel">
+          <summary>
+            <span>Ver videos informativos</span>
+            <small>Despliega esta sección para revisar el material audiovisual.</small>
+          </summary>
+          <div class="panel-body">
+            <div class="videos" id="videoGrid"></div>
+          </div>
+        </details>
       </div>
     </section>
 
+
+
     <section class="section soft" id="documentos">
       <div class="wrap grid-2">
-        <div>
-          <div class="section-head compact">
-            <span class="section-icon">📋</span>
-            <div><h2>Documentos requeridos</h2><p>Documentos de referencia para la atención del evento.</p></div>
+        <details class="collapsible-panel info-panel">
+          <summary>
+            <span>Documentos requeridos</span>
+            <small>Revisa los documentos de referencia para reportar y respaldar el evento.</small>
+          </summary>
+          <div class="panel-body">
+            <div id="docList" class="checklist"></div>
           </div>
-          <div id="docList" class="checklist"></div>
-        </div>
-        <div>
-          <div class="section-head compact">
-            <span class="section-icon">❓</span>
-            <div><h2>Preguntas frecuentes</h2><p>Orientación general para la consulta de seguros.</p></div>
+        </details>
+        <details class="collapsible-panel info-panel">
+          <summary>
+            <span>Preguntas frecuentes</span>
+            <small>Orientación general para la consulta de seguros vehiculares.</small>
+          </summary>
+          <div class="panel-body">
+            <div id="faqList" class="faq-list"></div>
           </div>
-          <div id="faqList" class="faq-list"></div>
-        </div>
+        </details>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">

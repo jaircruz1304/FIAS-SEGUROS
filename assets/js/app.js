@@ -25,6 +25,70 @@ const iconFor = (cat = "") => {
 };
 
 
+const DAMAGE_COVERAGE_BASE = [
+  {
+    tipo_cobertura: "Daños propios",
+    nombre_cobertura: "Choque, volcadura, incendio, rayo, explosión y rotura de vidrios",
+    descripcion: "Daños materiales del vehículo asegurado ocasionados por accidentes o eventos cubiertos, según las condiciones particulares de cada póliza.",
+    aplica_a: "Vehículos y motos",
+    deducible: "Según póliza",
+    mostrar_web: "SI"
+  },
+  {
+    tipo_cobertura: "Robo / hurto",
+    nombre_cobertura: "Pérdida total o parcial por robo o hurto",
+    descripcion: "Ampara la desaparición física del vehículo o partes aseguradas, conforme requisitos de denuncia, notificación y documentación.",
+    aplica_a: "Vehículos y motos",
+    deducible: "Según póliza",
+    mostrar_web: "SI"
+  },
+  {
+    tipo_cobertura: "Fenómenos naturales",
+    nombre_cobertura: "Inundación, terremoto, erupción, deslizamiento, caída de rocas y otros eventos naturales",
+    descripcion: "Cubre daños derivados de fenómenos de la naturaleza cuando consten dentro de las condiciones de la póliza.",
+    aplica_a: "Vehículos y motos",
+    deducible: "Según póliza",
+    mostrar_web: "SI"
+  },
+  {
+    tipo_cobertura: "Impactos y eventos externos",
+    nombre_cobertura: "Impacto con objetos sólidos, caída de árboles, edificios, aeronaves o partes de ellos",
+    descripcion: "Protección frente a impactos accidentales y caídas de objetos que afecten al bien asegurado.",
+    aplica_a: "Vehículos y motos",
+    deducible: "Según póliza",
+    mostrar_web: "SI"
+  },
+  {
+    tipo_cobertura: "Orden público / tránsito",
+    nombre_cobertura: "Motín, huelga, conmoción civil, daños maliciosos, paso de puentes y gabarras",
+    descripcion: "Eventos especiales descritos en las condiciones de la póliza y sujetos a exclusiones o requisitos de respaldo.",
+    aplica_a: "Vehículos y motos",
+    deducible: "Según póliza",
+    mostrar_web: "SI"
+  },
+  {
+    tipo_cobertura: "Amparos adicionales",
+    nombre_cobertura: "Responsabilidad civil, accidentes personales, gastos médicos y asistencia vial",
+    descripcion: "Coberturas complementarias sujetas a límites por póliza, tipo de vehículo, ocupantes y canales oficiales de asistencia.",
+    aplica_a: "Según póliza",
+    deducible: "Según póliza",
+    mostrar_web: "SI"
+  }
+];
+
+const coverageIcon = (text = "") => {
+  const t = clean(text).toLowerCase();
+  if (t.includes("robo") || t.includes("hurto")) return "🔐";
+  if (t.includes("natural") || t.includes("terremoto") || t.includes("inund")) return "🌧️";
+  if (t.includes("responsabilidad")) return "🤝";
+  if (t.includes("asistencia") || t.includes("grúa") || t.includes("wincha")) return "🛠️";
+  if (t.includes("accidente") || t.includes("médico")) return "🧑‍⚕️";
+  if (t.includes("impacto") || t.includes("caída")) return "🌳";
+  return "🚗";
+};
+
+
+
 const stepIconSvg = (name = "", type = "") => {
   const key = clean(name).toLowerCase();
   const isNo = clean(type).toUpperCase() === "NO_HACER";
@@ -121,6 +185,58 @@ function renderAssistance(rows = []) {
     </div>`).join("");
 }
 
+
+function renderCoverages(rows = []) {
+  const registeredRows = (rows || [])
+    .filter(r => safe(r.mostrar_web).toUpperCase() !== "NO")
+    .map(r => ({
+      tipo_cobertura: clean(r.tipo_cobertura) || "Cobertura",
+      nombre_cobertura: clean(r.nombre_cobertura) || "Cobertura registrada",
+      descripcion: clean(r.descripcion) || "Aplicable según condiciones particulares de la póliza.",
+      limite_usd: clean(r.limite_usd),
+      deducible: clean(r.deducible),
+      aplica_a: clean(r.aplica_a) || "Según póliza"
+    }));
+
+  const baseRows = DAMAGE_COVERAGE_BASE;
+  const summaryRows = baseRows.slice(0, 6);
+
+  $("coverageSummary").innerHTML = summaryRows.map(r => `
+    <article class="coverage-card">
+      <span class="coverage-icon">${coverageIcon(r.nombre_cobertura + " " + r.tipo_cobertura)}</span>
+      <h3>${esc(r.tipo_cobertura)}</h3>
+      <p>${esc(r.nombre_cobertura)}</p>
+    </article>
+  `).join("");
+
+  const combined = [
+    ...baseRows.map(r => ({...r, fuente: "Daños principales"})),
+    ...registeredRows.map(r => ({...r, fuente: "Cobertura registrada"}))
+  ];
+
+  $("coverageAccordion").innerHTML = combined.map((r, index) => {
+    const limit = clean(r.limite_usd) ? `<span><b>Límite:</b> ${money.format(+r.limite_usd || 0)}</span>` : "";
+    const deductible = clean(r.deducible) ? `<span><b>Deducible:</b> ${esc(r.deducible)}</span>` : "";
+    return `<details class="accordion-item" ${index === 0 ? "open" : ""}>
+      <summary>
+        <span class="accordion-icon">${coverageIcon(r.nombre_cobertura + " " + r.tipo_cobertura)}</span>
+        <span>
+          <b>${esc(r.nombre_cobertura)}</b>
+          <small>${esc(r.tipo_cobertura)} · ${esc(r.aplica_a || "Según póliza")}</small>
+        </span>
+      </summary>
+      <div class="accordion-body">
+        <p>${esc(r.descripcion)}</p>
+        <div class="coverage-meta">
+          ${limit}
+          ${deductible}
+          <span><b>Nota:</b> Aplicación sujeta a condiciones particulares, exclusiones, deducibles y documentación de respaldo.</span>
+        </div>
+      </div>
+    </details>`;
+  }).join("") || emptyCardState("Ingresa coberturas", "Actualiza la hoja Coberturas del Excel maestro para visualizar los daños cubiertos.");
+}
+
 function renderSteps(rows = []) {
   const visibleRows = rows
     .filter(r => safe(r.mostrar_web).toUpperCase() !== "NO")
@@ -129,17 +245,19 @@ function renderSteps(rows = []) {
   $("stepsGrid").innerHTML = visibleRows.map(r => {
       const no = safe(r.tipo).toUpperCase() === "NO_HACER";
       const order = Number(r.orden) || 0;
-      return `<article class="step ${no ? "step-no" : "step-ok"}">
-        <div class="step-top">
+      return `<details class="step step-detail ${no ? "step-no" : "step-ok"}">
+        <summary class="step-summary">
           <div class="step-icon-wrap" aria-hidden="true">${stepIconSvg(r.icono, r.tipo)}</div>
-          <div class="step-meta">
+          <div class="step-title-wrap">
             <span class="step-number">PASO ${order.toString().padStart(2, "0")}</span>
-            <span class="step-kind ${no ? "no" : "ok"}">${no ? "No hacer" : "Hacer"}</span>
+            <h3>${safe(r.titulo)}</h3>
           </div>
+          <span class="step-kind ${no ? "no" : "ok"}">${no ? "No hacer" : "Hacer"}</span>
+        </summary>
+        <div class="step-body">
+          <p>${safe(r.descripcion)}</p>
         </div>
-        <h3>${safe(r.titulo)}</h3>
-        <p>${safe(r.descripcion)}</p>
-      </article>`;
+      </details>`;
     }).join("") || emptyCardState("Ingresa el procedimiento", "Actualiza la hoja Procedimiento_Siniestro del Excel maestro para visualizar los pasos con sus íconos.");
 }
 
@@ -167,7 +285,8 @@ function renderPolicies() {
   if (!allRows.length) {
     $("policyTable").innerHTML = emptyTableRow(
       "Ingresa datos para procesar la información",
-      "Actualiza la hoja de pólizas en el Excel maestro o ejecuta la sincronización desde OneDrive/SharePoint para visualizar los registros."
+      "Actualiza la hoja de pólizas en el Excel maestro o ejecuta la sincronización para visualizar los registros.",
+      5
     );
     return;
   }
@@ -181,7 +300,8 @@ function renderPolicies() {
   if (!rows.length) {
     $("policyTable").innerHTML = emptyTableRow(
       "No hay resultados con esos criterios",
-      "Modifica la búsqueda, limpia los filtros o selecciona otro estado para consultar las pólizas disponibles."
+      "Modifica la búsqueda, limpia los filtros o selecciona otro estado para consultar las pólizas disponibles.",
+      5
     );
     return;
   }
@@ -190,12 +310,20 @@ function renderPolicies() {
     const st = statusFor(p.vig_hasta);
     return `<tr>
       <td><b>${safe(p.id_poliza)}</b><br><small>${safe(p.poliza_numero)} · ${safe(p.documento)}</small></td>
-      <td>${safe(p.aseguradora)}</td>
       <td>${formatDate(p.vig_desde)}<br><b>${formatDate(p.vig_hasta)}</b></td>
-      <td>${safe(p.reserva_proyecto)}</td>
       <td>${money.format(+p.suma_asegurada_poliza || 0)}</td>
-      <td>${money.format(+p.total_pagado || 0)}</td>
       <td><span class="status ${st.key}">${st.label}</span></td>
+      <td>
+        <details class="mini-details">
+          <summary>Ver detalle</summary>
+          <div>
+            <b>Aseguradora:</b> ${safe(p.aseguradora)}<br>
+            <b>Reserva / proyecto:</b> ${safe(p.reserva_proyecto)}<br>
+            <b>Total pagado:</b> ${money.format(+p.total_pagado || 0)}<br>
+            <b>Archivo:</b> ${safe(p.pdf_nombre)}
+          </div>
+        </details>
+      </td>
     </tr>`;
   }).join("");
 }
@@ -210,7 +338,7 @@ function renderVehicles() {
   if (!allRows.length) {
     $("vehicleCards").innerHTML = emptyCardState(
       "Ingresa datos para procesar la información",
-      "Actualiza la hoja de bienes asegurados en el Excel maestro o ejecuta la sincronización desde OneDrive/SharePoint para visualizar los vehículos."
+      "Actualiza la hoja de bienes asegurados en el Excel maestro o ejecuta la sincronización para visualizar los vehículos."
     );
     return;
   }
@@ -228,31 +356,49 @@ function renderVehicles() {
     return;
   }
 
-  $("vehicleCards").innerHTML = rows.map(v => `<article class="vcard">
-    <span class="tag">${iconFor(v.categoria)} ${safe(v.categoria)}</span>
-    <h3>${safe(v.marca)} ${safe(v.modelo)}</h3>
-    <p><b>Placa:</b> ${safe(v.placa)} · <b>Año:</b> ${safe(v.anio)}</p>
+  $("vehicleCards").innerHTML = rows.map(v => `<details class="vcard vehicle-detail-card">
+    <summary>
+      <span class="tag">${iconFor(v.categoria)} ${safe(v.categoria)}</span>
+      <h3>${safe(v.marca)} ${safe(v.modelo)}</h3>
+      <p><b>Placa:</b> ${safe(v.placa)} · <b>Año:</b> ${safe(v.anio)} · <b>Valor:</b> ${money.format(+v.total_asegurado || 0)}</p>
+    </summary>
     <div class="detail-grid">
       <div class="detail"><b>Póliza</b><span>${safe(v.id_poliza)}</span></div>
       <div class="detail"><b>Valor asegurado</b><span>${money.format(+v.total_asegurado || 0)}</span></div>
       <div class="detail"><b>Reserva / Proyecto</b><span>${safe(v.reserva_proyecto)}</span></div>
       <div class="detail"><b>Deducible</b><span>${safe(v.deducible)}</span></div>
+      <div class="detail"><b>Color</b><span>${safe(v.color)}</span></div>
+      <div class="detail"><b>Custodio / ubicación</b><span>${safe(v.responsable_custodio)} · ${safe(v.ubicacion)}</span></div>
     </div>
-  </article>`).join("");
+  </details>`).join("");
 }
 
 function renderDocuments(rows = []) {
-  $("docList").innerHTML = rows
+  const visible = rows
     .filter(r => safe(r.mostrar_web).toUpperCase() !== "NO")
-    .sort((a,b)=>(+a.orden||0)-(+b.orden||0))
-    .map(r => `<div class="check-item"><strong>✅ ${safe(r.documento)}</strong><small>${safe(r.descripcion)} · ${safe(r.aplica_a)}</small></div>`).join("");
+    .sort((a,b)=>(+a.orden||0)-(+b.orden||0));
+
+  $("docList").innerHTML = visible.map(r => `<details class="accordion-item compact-accordion-item">
+    <summary>
+      <span class="accordion-icon">📋</span>
+      <span><b>${safe(r.documento)}</b><small>${safe(r.aplica_a)}</small></span>
+    </summary>
+    <div class="accordion-body"><p>${safe(r.descripcion)}</p></div>
+  </details>`).join("") || emptyCardState("Ingresa documentos requeridos", "Actualiza la hoja Documentos_Requeridos del Excel maestro.");
 }
 
 function renderFAQ(rows = []) {
-  $("faqList").innerHTML = rows
+  const visible = rows
     .filter(r => safe(r.mostrar_web).toUpperCase() !== "NO")
-    .sort((a,b)=>(+a.orden||0)-(+b.orden||0))
-    .map(r => `<div class="faq-item"><strong>${safe(r.pregunta)}</strong><p>${safe(r.respuesta)}</p></div>`).join("");
+    .sort((a,b)=>(+a.orden||0)-(+b.orden||0));
+
+  $("faqList").innerHTML = visible.map(r => `<details class="accordion-item compact-accordion-item">
+    <summary>
+      <span class="accordion-icon">❓</span>
+      <span><b>${safe(r.pregunta)}</b><small>${safe(r.categoria || "Consulta general")}</small></span>
+    </summary>
+    <div class="accordion-body"><p>${safe(r.respuesta)}</p></div>
+  </details>`).join("") || emptyCardState("Ingresa preguntas frecuentes", "Actualiza la hoja FAQ del Excel maestro.");
 }
 
 function setHeroVideo(rows = []) {
@@ -358,6 +504,7 @@ async function init() {
     setConfig(STORE);
     renderKPIs(STORE.kpis);
     renderAssistance(STORE.asistencia);
+    renderCoverages(STORE.coberturas);
     renderSteps(STORE.procedimiento_siniestro);
     populateFilters(STORE);
     renderPolicies();
