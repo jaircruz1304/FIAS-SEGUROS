@@ -1275,3 +1275,51 @@ a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));m
     width:min(100%, 238px) !important;
   }
 }
+
+
+/* =========================================================
+   RESPONSIVE MÓVIL: FILTROS, PAGINACIÓN Y LISTAS COMPACTAS
+   ========================================================= */
+.filter-panel{display:grid;gap:12px;margin-bottom:14px}
+.toolbar{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px;align-items:center}
+.toolbar input,.toolbar select{min-height:48px;border-radius:999px;border:1px solid var(--line);background:#fff;padding:0 16px;font-weight:780;color:#1f2933;box-shadow:0 10px 24px rgba(15,23,42,.04)}
+.advanced-filters{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 8px 20px rgba(15,23,42,.04);overflow:hidden}
+.advanced-filters>summary{list-style:none;cursor:pointer;padding:14px 18px;font-weight:950;color:var(--green)}
+.advanced-filters>summary::-webkit-details-marker{display:none}
+.advanced-filters>summary:after{content:" +"}
+.advanced-filters[open]>summary:after{content:" −"}
+.advanced-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;padding:0 14px 14px}
+.advanced-grid select{min-height:44px;border-radius:14px;border:1px solid var(--line);padding:0 12px;font-weight:780}
+.btn-small{min-height:44px;padding:10px 14px}
+.result-meta{margin:10px 0 14px;color:var(--muted);font-weight:850}
+.pager{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.pager span{color:var(--muted);font-weight:900}
+.pager-btn{border:1px solid rgba(11,138,85,.25);background:#fff;color:var(--green);padding:10px 14px;border-radius:999px;font-weight:950;cursor:pointer;box-shadow:0 8px 20px rgba(15,23,42,.05)}
+.pager-btn:disabled{opacity:.45;cursor:not-allowed}
+.mobile-result-cards{display:none}
+.mobile-policy-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 12px 26px rgba(15,23,42,.06)}
+.mobile-card-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}
+.mobile-policy-card h3{margin:0 0 8px;color:#1f2933}
+.mobile-policy-card p{margin:6px 0;color:#4b5563;font-weight:760;line-height:1.4}
+@media (max-width:980px){
+  .toolbar{grid-template-columns:1fr 1fr}
+  .advanced-grid{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .section{padding:48px 0}
+  .toolbar{grid-template-columns:1fr;gap:10px}
+  .toolbar input,.toolbar select{width:100%;min-height:46px;border-radius:16px}
+  .desktop-policy-table{display:none!important}
+  .mobile-result-cards{display:grid;gap:12px}
+  .compact-cards{grid-template-columns:1fr!important}
+  .vehicle-detail-card>summary{padding:16px}
+  .vehicle-detail-card>summary h3{font-size:1.05rem;line-height:1.25}
+  .vehicle-detail-card>summary p{font-size:.92rem;line-height:1.4}
+  .vehicle-detail-card .detail-grid{grid-template-columns:1fr!important;padding:0 16px 16px}
+  .detail{padding:12px}
+  .pager{gap:8px}
+  .pager-btn{padding:9px 12px}
+  .result-meta{font-size:.9rem}
+  .mobile-card-top{align-items:flex-start;flex-direction:column}
+  .mobile-policy-card .status{align-self:flex-start}
+}

@@ -1,5 +1,8 @@
 const DATA_URL = "./data/seguros/seguros-vehiculares.json";
 let STORE = null;
+let policyPage = 1;
+let vehiclePage = 1;
+const isMobile = () => window.matchMedia("(max-width: 760px)").matches;
 
 const $ = (id) => document.getElementById(id);
 const money = new Intl.NumberFormat("es-EC", { style: "currency", currency: "USD" });
@@ -8,6 +11,42 @@ const num = new Intl.NumberFormat("es-EC");
 const safe = (value) => value === null || value === undefined || value === "" ? "—" : String(value);
 const clean = (value) => value === null || value === undefined || value === "" || value === "—" ? "" : String(value).trim();
 const lower = (value) => safe(value).toLowerCase();
+
+const uniq = (arr) => [...new Set(arr.map(clean).filter(Boolean))].sort((a,b)=>a.localeCompare(b, "es"));
+const getSelectValue = (id) => ($(id) ? $(id).value : "");
+const setSelectOptions = (id, items, placeholder) => {
+  const el = $(id);
+  if (!el) return;
+  el.innerHTML = `<option value="">${placeholder}</option>` + items.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
+};
+const pageSizeValue = (id, mobileDefault, desktopDefault) => {
+  const el = $(id);
+  if (!el) return isMobile() ? mobileDefault : desktopDefault;
+  if (el.value === "all") return Infinity;
+  const n = Number(el.value);
+  return Number.isFinite(n) && n > 0 ? n : (isMobile() ? mobileDefault : desktopDefault);
+};
+const clampPage = (page, totalPages) => Math.max(1, Math.min(page, Math.max(1, totalPages)));
+const paginate = (rows, page, size) => {
+  if (!Number.isFinite(size)) return { rows, totalPages: 1, page: 1, total: rows.length };
+  const totalPages = Math.max(1, Math.ceil(rows.length / size));
+  const current = clampPage(page, totalPages);
+  const start = (current - 1) * size;
+  return { rows: rows.slice(start, start + size), totalPages, page: current, total: rows.length };
+};
+const renderPager = (id, state, onPrev, onNext) => {
+  const el = $(id);
+  if (!el) return;
+  if (state.totalPages <= 1) { el.innerHTML = ""; return; }
+  el.innerHTML = `
+    <button class="pager-btn" type="button" data-action="prev" ${state.page <= 1 ? "disabled" : ""}>Anterior</button>
+    <span>Página ${state.page} de ${state.totalPages}</span>
+    <button class="pager-btn" type="button" data-action="next" ${state.page >= state.totalPages ? "disabled" : ""}>Siguiente</button>
+  `;
+  el.querySelector('[data-action="prev"]')?.addEventListener("click", onPrev);
+  el.querySelector('[data-action="next"]')?.addEventListener("click", onNext);
+};
+
 const esc = (value) => clean(value)
   .replaceAll("&", "&amp;")
   .replaceAll("<", "&lt;")
@@ -179,36 +218,64 @@ function renderSteps(rows = []) {
 }
 
 function populateFilters(data) {
+  const policyRows = getRows("polizas").filter(p => safe(p.mostrar_web).toUpperCase() !== "NO");
+  const vehicleRows = getRows("bienes").filter(v => safe(v.mostrar_web).toUpperCase() !== "NO");
+
   const statusOptions = ["vigente","por-vencer","vencida","sin-fecha"];
   $("policyStatus").innerHTML = `<option value="">Todos los estados</option>` + statusOptions.map(s => `<option value="${s}">${s.replace("-", " ")}</option>`).join("");
 
-  const categories = [...new Set(getRows("bienes").map(v => clean(v.categoria)).filter(Boolean))].sort();
-  $("categoryFilter").innerHTML = `<option value="">Todas las categorías</option>` + categories.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+  setSelectOptions("policyYear", uniq(policyRows.flatMap(p => [clean(p.vig_desde).slice(0,4), clean(p.vig_hasta).slice(0,4)]).filter(v => /^\d{4}$/.test(v))), "Todos los años");
+  setSelectOptions("policyInsurer", uniq(policyRows.map(p => p.aseguradora)), "Todas las aseguradoras");
+  setSelectOptions("policyProject", uniq(policyRows.map(p => p.reserva_proyecto)), "Todas las reservas/proyectos");
+
+  setSelectOptions("categoryFilter", uniq(vehicleRows.map(v => v.categoria)), "Todas las categorías");
+  setSelectOptions("vehiclePolicyFilter", uniq(vehicleRows.map(v => v.id_poliza)), "Todas las pólizas");
+  setSelectOptions("vehicleProject", uniq(vehicleRows.map(v => v.reserva_proyecto)), "Todas las reservas/proyectos");
+  setSelectOptions("vehicleStatus", uniq(vehicleRows.map(v => v.estado_operativo)), "Todos los estados operativos");
+
+  if ($("policyLimit")) $("policyLimit").value = isMobile() ? "5" : "10";
+  if ($("vehicleLimit")) $("vehicleLimit").value = isMobile() ? "6" : "12";
 }
 
 function renderPolicies() {
   if (!STORE) return;
   const q = clean($("policySearch").value).toLowerCase();
   const status = $("policyStatus").value;
+  const year = getSelectValue("policyYear");
+  const insurer = getSelectValue("policyInsurer");
+  const project = getSelectValue("policyProject");
   const allRows = getRows("polizas").filter(p => safe(p.mostrar_web).toUpperCase() !== "NO");
 
   if (!allRows.length) {
     $("policyTable").innerHTML = emptyTableRow("Pólizas pendientes de sincronización", "Ejecuta el workflow para cargar la matriz desde OneDrive.", 5);
+    if ($("policyCards")) $("policyCards").innerHTML = emptyCardState("Pólizas pendientes de sincronización", "Ejecuta el workflow para cargar la matriz desde OneDrive.");
+    if ($("policyPager")) $("policyPager").innerHTML = "";
     return;
   }
 
   const rows = allRows.filter(p => {
     const st = statusFor(p.vig_hasta);
     const text = [p.id_poliza,p.poliza_numero,p.aseguradora,p.reserva_proyecto,p.pdf_nombre].map(lower).join(" ");
-    return (!q || text.includes(q)) && (!status || st.key === status);
+    const years = [clean(p.vig_desde).slice(0,4), clean(p.vig_hasta).slice(0,4)];
+    return (!q || text.includes(q))
+      && (!status || st.key === status)
+      && (!year || years.includes(year))
+      && (!insurer || clean(p.aseguradora) === insurer)
+      && (!project || clean(p.reserva_proyecto) === project);
   });
 
+  const state = paginate(rows, policyPage, pageSizeValue("policyLimit", 5, 10));
+  policyPage = state.page;
+  if ($("policyResultMeta")) $("policyResultMeta").innerHTML = rows.length ? `Mostrando <b>${state.rows.length}</b> de <b>${rows.length}</b> pólizas filtradas.` : `No hay pólizas con los filtros aplicados.`;
+
   if (!rows.length) {
-    $("policyTable").innerHTML = emptyTableRow("No hay resultados con esos criterios", "Limpia la búsqueda o cambia el estado seleccionado.", 5);
+    $("policyTable").innerHTML = emptyTableRow("No hay resultados con esos criterios", "Limpia la búsqueda o cambia los filtros seleccionados.", 5);
+    if ($("policyCards")) $("policyCards").innerHTML = emptyCardState("No hay resultados con esos criterios", "Limpia la búsqueda o cambia los filtros seleccionados.");
+    if ($("policyPager")) $("policyPager").innerHTML = "";
     return;
   }
 
-  $("policyTable").innerHTML = rows.map(p => {
+  $("policyTable").innerHTML = state.rows.map(p => {
     const st = statusFor(p.vig_hasta);
     return `<tr>
       <td><b>${safe(p.id_poliza)}</b><br><small>${safe(p.poliza_numero)} · ${safe(p.documento)}</small></td>
@@ -228,30 +295,69 @@ function renderPolicies() {
       </td>
     </tr>`;
   }).join("");
+
+  if ($("policyCards")) {
+    $("policyCards").innerHTML = state.rows.map(p => {
+      const st = statusFor(p.vig_hasta);
+      return `<article class="mobile-policy-card">
+        <div class="mobile-card-top">
+          <span class="tag">📄 ${safe(p.documento)}</span>
+          <span class="status ${st.key}">${st.label}</span>
+        </div>
+        <h3>${safe(p.id_poliza)}</h3>
+        <p><b>Vigencia:</b> ${formatDate(p.vig_desde)} - ${formatDate(p.vig_hasta)}</p>
+        <p><b>Suma asegurada:</b> ${money.format(+p.suma_asegurada_poliza || 0)}</p>
+        <details class="mini-details">
+          <summary>Ver más</summary>
+          <div>
+            <b>Aseguradora:</b> ${safe(p.aseguradora)}<br>
+            <b>Reserva / proyecto:</b> ${safe(p.reserva_proyecto)}<br>
+            <b>Total pagado:</b> ${money.format(+p.total_pagado || 0)}<br>
+            <b>Archivo:</b> ${safe(p.pdf_nombre)}
+          </div>
+        </details>
+      </article>`;
+    }).join("");
+  }
+
+  renderPager("policyPager", state, () => { policyPage -= 1; renderPolicies(); }, () => { policyPage += 1; renderPolicies(); });
 }
 
 function renderVehicles() {
   if (!STORE) return;
   const q = clean($("vehicleSearch").value).toLowerCase();
   const cat = $("categoryFilter").value;
+  const pol = getSelectValue("vehiclePolicyFilter");
+  const project = getSelectValue("vehicleProject");
+  const opStatus = getSelectValue("vehicleStatus");
   const allRows = getRows("bienes").filter(v => safe(v.mostrar_web).toUpperCase() !== "NO");
 
   if (!allRows.length) {
     $("vehicleCards").innerHTML = emptyCardState("Bienes pendientes de sincronización", "Ejecuta el workflow para cargar la matriz desde OneDrive.");
+    if ($("vehiclePager")) $("vehiclePager").innerHTML = "";
     return;
   }
 
   const rows = allRows.filter(v => {
     const text = [v.placa,v.marca,v.modelo,v.reserva_proyecto,v.id_poliza,v.categoria].map(lower).join(" ");
-    return (!q || text.includes(q)) && (!cat || v.categoria === cat);
+    return (!q || text.includes(q))
+      && (!cat || clean(v.categoria) === cat)
+      && (!pol || clean(v.id_poliza) === pol)
+      && (!project || clean(v.reserva_proyecto) === project)
+      && (!opStatus || clean(v.estado_operativo) === opStatus);
   });
 
+  const state = paginate(rows, vehiclePage, pageSizeValue("vehicleLimit", 6, 12));
+  vehiclePage = state.page;
+  if ($("vehicleResultMeta")) $("vehicleResultMeta").innerHTML = rows.length ? `Mostrando <b>${state.rows.length}</b> de <b>${rows.length}</b> bienes filtrados.` : `No hay bienes con los filtros aplicados.`;
+
   if (!rows.length) {
-    $("vehicleCards").innerHTML = emptyCardState("No hay resultados con esos criterios", "Limpia la búsqueda o cambia la categoría seleccionada.");
+    $("vehicleCards").innerHTML = emptyCardState("No hay resultados con esos criterios", "Limpia la búsqueda o cambia los filtros seleccionados.");
+    if ($("vehiclePager")) $("vehiclePager").innerHTML = "";
     return;
   }
 
-  $("vehicleCards").innerHTML = rows.map(v => `<details class="vcard vehicle-detail-card">
+  $("vehicleCards").innerHTML = state.rows.map(v => `<details class="vcard vehicle-detail-card">
     <summary>
       <span class="tag">${iconFor(v.categoria)} ${safe(v.categoria)}</span>
       <h3>${safe(v.marca)} ${safe(v.modelo)}</h3>
@@ -266,6 +372,8 @@ function renderVehicles() {
       <div class="detail"><b>Custodio / ubicación</b><span>${safe(v.responsable_custodio)} · ${safe(v.ubicacion)}</span></div>
     </div>
   </details>`).join("");
+
+  renderPager("vehiclePager", state, () => { vehiclePage -= 1; renderVehicles(); }, () => { vehiclePage += 1; renderVehicles(); });
 }
 
 function renderDocuments(rows = []) {
@@ -378,10 +486,43 @@ async function init() {
   }
 }
 
-["policySearch","policyStatus","vehicleSearch","categoryFilter"].forEach(id => {
+[
+  "policySearch","policyStatus","policyYear","policyInsurer","policyProject","policyLimit"
+].forEach(id => {
   const el = $(id);
   if (!el) return;
-  el.addEventListener(id.includes("policy") ? (id === "policySearch" ? "input" : "change") : (id === "vehicleSearch" ? "input" : "change"), id.includes("policy") ? renderPolicies : renderVehicles);
+  el.addEventListener(id === "policySearch" ? "input" : "change", () => {
+    policyPage = 1;
+    renderPolicies();
+  });
+});
+
+[
+  "vehicleSearch","categoryFilter","vehiclePolicyFilter","vehicleProject","vehicleStatus","vehicleLimit"
+].forEach(id => {
+  const el = $(id);
+  if (!el) return;
+  el.addEventListener(id === "vehicleSearch" ? "input" : "change", () => {
+    vehiclePage = 1;
+    renderVehicles();
+  });
+});
+
+$("clearPolicyFilters")?.addEventListener("click", () => {
+  ["policySearch","policyStatus","policyYear","policyInsurer","policyProject"].forEach(id => { if ($(id)) $(id).value = ""; });
+  policyPage = 1;
+  renderPolicies();
+});
+
+$("clearVehicleFilters")?.addEventListener("click", () => {
+  ["vehicleSearch","categoryFilter","vehiclePolicyFilter","vehicleProject","vehicleStatus"].forEach(id => { if ($(id)) $(id).value = ""; });
+  vehiclePage = 1;
+  renderVehicles();
+});
+
+window.addEventListener("resize", () => {
+  renderPolicies();
+  renderVehicles();
 });
 
 $("menuButton").addEventListener("click", () => $("navLinks").classList.toggle("open"));

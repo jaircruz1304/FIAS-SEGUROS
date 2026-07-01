@@ -118,11 +118,29 @@
             <p>Consulta de vigencias, valores asegurados y estado de cobertura.</p>
           </div>
         </div>
-        <div class="toolbar">
-          <input id="policySearch" type="search" placeholder="Buscar póliza, reserva, aseguradora..." />
-          <select id="policyStatus"><option value="">Todos los estados</option></select>
+        <div class="filter-panel">
+          <div class="toolbar">
+            <input id="policySearch" type="search" placeholder="Buscar póliza, reserva, aseguradora..." />
+            <select id="policyStatus"><option value="">Todos los estados</option></select>
+            <select id="policyYear"><option value="">Todos los años</option></select>
+            <select id="policyLimit" aria-label="Cantidad de pólizas a mostrar">
+              <option value="5">Mostrar 5</option>
+              <option value="10">Mostrar 10</option>
+              <option value="20">Mostrar 20</option>
+              <option value="all">Mostrar todo</option>
+            </select>
+          </div>
+          <details class="advanced-filters">
+            <summary>Más filtros</summary>
+            <div class="advanced-grid">
+              <select id="policyInsurer"><option value="">Todas las aseguradoras</option></select>
+              <select id="policyProject"><option value="">Todas las reservas/proyectos</option></select>
+              <button class="btn btn-ghost btn-small" id="clearPolicyFilters" type="button">Limpiar filtros</button>
+            </div>
+          </details>
         </div>
-        <div class="table-wrap compact-table">
+        <div class="result-meta" id="policyResultMeta"></div>
+        <div class="table-wrap compact-table desktop-policy-table">
           <table>
             <thead>
               <tr>
@@ -136,6 +154,8 @@
             <tbody id="policyTable"></tbody>
           </table>
         </div>
+        <div id="policyCards" class="mobile-result-cards"></div>
+        <div class="pager" id="policyPager"></div>
       </div>
     </section>
 
@@ -148,11 +168,30 @@
             <p>Consulta de vehículos, motos y bienes registrados en la cobertura.</p>
           </div>
         </div>
-        <div class="toolbar">
-          <input id="vehicleSearch" type="search" placeholder="Buscar placa, marca, modelo, reserva..." />
-          <select id="categoryFilter"><option value="">Todas las categorías</option></select>
+        <div class="filter-panel">
+          <div class="toolbar">
+            <input id="vehicleSearch" type="search" placeholder="Buscar placa, marca, modelo, reserva..." />
+            <select id="categoryFilter"><option value="">Todas las categorías</option></select>
+            <select id="vehiclePolicyFilter"><option value="">Todas las pólizas</option></select>
+            <select id="vehicleLimit" aria-label="Cantidad de bienes a mostrar">
+              <option value="6">Mostrar 6</option>
+              <option value="12">Mostrar 12</option>
+              <option value="24">Mostrar 24</option>
+              <option value="all">Mostrar todo</option>
+            </select>
+          </div>
+          <details class="advanced-filters">
+            <summary>Más filtros</summary>
+            <div class="advanced-grid">
+              <select id="vehicleProject"><option value="">Todas las reservas/proyectos</option></select>
+              <select id="vehicleStatus"><option value="">Todos los estados operativos</option></select>
+              <button class="btn btn-ghost btn-small" id="clearVehicleFilters" type="button">Limpiar filtros</button>
+            </div>
+          </details>
         </div>
+        <div class="result-meta" id="vehicleResultMeta"></div>
         <div id="vehicleCards" class="cards compact-cards"></div>
+        <div class="pager" id="vehiclePager"></div>
       </div>
     </section>
 
