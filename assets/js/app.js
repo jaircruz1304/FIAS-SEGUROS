@@ -313,7 +313,11 @@ function setHeroVideo(rows = []) {
     heroSource.setAttribute("src", src);
     heroVideo.load();
   }
-  if (poster) heroVideo.setAttribute("poster", poster);
+  if (poster && !poster.toLowerCase().includes("logo")) {
+    heroVideo.setAttribute("poster", poster);
+  } else {
+    heroVideo.removeAttribute("poster");
+  }
 
   const tryPlay = heroVideo.play();
   if (tryPlay && typeof tryPlay.catch === "function") tryPlay.catch(() => {});
@@ -328,7 +332,7 @@ function renderVideos(rows = []) {
   $("videoGrid").innerHTML = visible.map((r, index) => {
     const videoSrc = clean(r.archivo_repo);
     const poster = clean(r.miniatura_repo);
-    const posterAttr = poster ? ` poster="${esc(poster)}"` : "";
+    const posterAttr = poster && !poster.toLowerCase().includes("logo") ? ` poster="${esc(poster)}"` : "";
     const media = videoSrc
       ? `<video class="phone-frame-video" controls playsinline preload="metadata"${posterAttr} aria-label="${esc(r.titulo)}">
           <source src="${esc(videoSrc)}" type="video/mp4">

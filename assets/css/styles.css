@@ -1157,3 +1157,121 @@ a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));m
     width:min(100%, 240px);
   }
 }
+
+
+/* =========================================================
+   AJUSTE FINAL DE VIDEOS EN MARCO REAL DE TELÉFONO
+   ========================================================= */
+
+/* Quita definitivamente el aro/carretera decorativo que se montaba sobre el banner */
+.hero-road,
+.road.hero-road{
+  display:none !important;
+}
+
+/* Mejora visual del logo FIAS del encabezado */
+.brand-logo{
+  width:170px;
+  max-width:42vw;
+  height:auto;
+  object-fit:contain;
+  display:block;
+}
+
+/* El teléfono del banner no debe dominar toda la pantalla */
+.hero-video-phone.phone-image-frame{
+  width:min(100%, 300px) !important;
+}
+
+/* Teléfonos de la sección videos */
+.video-list-phone.phone-image-frame{
+  width:min(100%, 270px) !important;
+}
+
+/* Coordenadas ajustadas de pantalla para la imagen real phone-frame-video.png.
+   El video llena el área útil entre la barra superior y la barra inferior del teléfono. */
+.phone-frame-video,
+.phone-image-frame .phone-video-placeholder{
+  position:absolute !important;
+  z-index:1 !important;
+  left:5.65% !important;
+  top:10.55% !important;
+  width:84.70% !important;
+  height:79.85% !important;
+  border:0 !important;
+  border-radius:11px !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+  background:#0b8a55 !important;
+  display:block !important;
+}
+
+/* El marco va encima, pero no bloquea los controles del video */
+.phone-frame-img{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  z-index:3 !important;
+  pointer-events:none !important;
+  user-select:none !important;
+}
+
+/* Oculta cualquier etiqueta FIAS o pseudo-elemento antiguo dentro del teléfono */
+.phone-screen-video:before,
+.phone-image-frame:before,
+.phone-image-frame:after{
+  display:none !important;
+  content:none !important;
+}
+
+/* Asegura que los controles nativos queden visibles y clicables */
+.phone-image-frame video{
+  pointer-events:auto !important;
+}
+.phone-image-frame video::-webkit-media-controls{
+  position:relative;
+  z-index:5;
+}
+
+/* La sección de videos debe aparecer desplegada y legible */
+#videos .collapsible-panel[open] .panel-body{
+  padding-top:18px;
+}
+#videos .videos{
+  align-items:start;
+}
+.video-phone-card{
+  overflow:visible;
+}
+.video-caption{
+  margin-top:12px;
+}
+
+/* Evita espacios verdes cuando los videos tardan en cargar */
+.phone-frame-video:not([src]),
+.phone-frame-video source{
+  background:#0b8a55;
+}
+
+@media (max-width:980px){
+  .hero-video-phone.phone-image-frame{
+    width:min(100%, 280px) !important;
+  }
+  .video-list-phone.phone-image-frame{
+    width:min(100%, 255px) !important;
+  }
+}
+
+@media (max-width:640px){
+  .brand-logo{
+    width:140px;
+  }
+  .hero-video-phone.phone-image-frame{
+    width:min(100%, 250px) !important;
+  }
+  .video-list-phone.phone-image-frame{
+    width:min(100%, 238px) !important;
+  }
+}
