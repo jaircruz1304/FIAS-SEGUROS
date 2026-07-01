@@ -2,7 +2,7 @@
   "meta": {
     "sistema": "FIAS Seguro Vehicular",
     "version": "1.0.0",
-    "ultima_actualizacion": "2026-07-01T07:33:17.654Z",
+    "ultima_actualizacion": "2026-07-01T12:59:49.223Z",
     "fuente": "OneDrive / SharePoint + GitHub Actions",
     "archivo_excel": "Base_Datos_Seguros_Vehiculares_FIAS.xlsx",
     "timezone": "America/Guayaquil"
@@ -46,7 +46,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201234",
@@ -78,7 +78,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201248",
@@ -110,7 +110,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201266",
@@ -142,7 +142,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201267",
@@ -174,7 +174,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201271",
@@ -206,7 +206,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201291",
@@ -238,7 +238,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205090",
@@ -270,7 +270,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205092",
@@ -302,7 +302,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205277",
@@ -334,7 +334,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205359",
@@ -366,7 +366,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205415",
@@ -398,7 +398,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VP-0205468",
@@ -430,7 +430,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     },
     {
       "id_poliza": "VO-0201299",
@@ -462,7 +462,7 @@
       "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
-      "dias_restantes": 185
+      "dias_restantes": 184
     }
   ],
   "bienes": [
