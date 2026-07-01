@@ -13,7 +13,8 @@ const SHEETS = {
   faq: "07_FAQ",
   videos: "08_Videos",
   config: "09_Config_Web",
-  catalogos: "10_Catalogos"
+  catalogos: "10_Catalogos",
+  riesgos: "11_Riesgos_No_Vehiculares"
 };
 
 function rows(workbook, sheetName) {
@@ -111,26 +112,44 @@ function configObject(rows) {
   return config;
 }
 
-function calcKpis(polizas, bienes) {
+function calcKpis(polizas, bienes, riesgos = []) {
   const categories = {};
   bienes.forEach(b => {
-    const cat = b.categoria || "Sin categoría";
+    const cat = normalizeText(b.categoria) || "Sin categoría";
     categories[cat] = (categories[cat] || 0) + 1;
   });
+
+  const ramos = [...new Set(polizas.map(p => normalizeText(p.ramo)).filter(Boolean))].sort();
+  const vigencias = polizas.map(p => normalizeText(p.vig_hasta)).filter(Boolean);
+  const desde = polizas.map(p => normalizeText(p.vig_desde)).filter(Boolean).sort();
+  const vigenciaCounts = {};
+  vigencias.forEach(v => vigenciaCounts[v] = (vigenciaCounts[v] || 0) + 1);
+  const vigenciaPrincipal = Object.entries(vigenciaCounts)
+    .sort((a, b) => (b[1] - a[1]) || b[0].localeCompare(a[0]))[0]?.[0] || "";
 
   const stateCounts = { VIGENTE: 0, POR_VENCER: 0, VENCIDA: 0, SIN_FECHA: 0 };
   polizas.forEach(p => stateCounts[p.estado || "SIN_FECHA"] = (stateCounts[p.estado || "SIN_FECHA"] || 0) + 1);
 
+  const totalSumaPolizas = Number(polizas.reduce((s, p) => s + (+p.suma_asegurada_poliza || 0), 0).toFixed(2));
+  const totalValorBienes = Number(bienes.reduce((s, b) => s + (+b.total_asegurado || 0), 0).toFixed(2));
+  const totalPrimas = Number(polizas.reduce((s, p) => s + (+p.total_pagado || 0), 0).toFixed(2));
+
   return {
     total_polizas: polizas.length,
+    ramos_cubiertos: ramos.length,
+    ramos_lista: ramos,
     total_bienes: bienes.length,
+    total_riesgos_no_vehiculares: riesgos.length,
     total_motos: categories["Motocicleta"] || categories["Moto"] || 0,
     total_camionetas: categories["Camioneta"] || 0,
-    total_jeep_suv: categories["Jeep/SUV"] || 0,
-    total_cuadrones: categories["Cuadrón"] || 0,
-    total_suma_asegurada: Number(polizas.reduce((s, p) => s + (+p.suma_asegurada_poliza || 0), 0).toFixed(2)),
-    total_valor_bienes: Number(bienes.reduce((s, b) => s + (+b.total_asegurado || 0), 0).toFixed(2)),
-    total_primas: Number(polizas.reduce((s, p) => s + (+p.total_pagado || 0), 0).toFixed(2)),
+    total_jeep_suv: categories["Jeep/SUV"] || categories["Jeep"] || categories["SUV"] || 0,
+    total_cuadrones: categories["Cuadrón"] || categories["Cuadron"] || 0,
+    total_suma_asegurada: totalSumaPolizas,
+    total_valor_bienes: totalValorBienes,
+    diferencia_polizas_bienes: Number((totalSumaPolizas - totalValorBienes).toFixed(2)),
+    total_primas: totalPrimas,
+    vigencia_principal_hasta: vigenciaPrincipal,
+    cobertura_anual: desde.length && vigenciaPrincipal ? `${desde[0]} a ${vigenciaPrincipal}` : "",
     vigentes: stateCounts.VIGENTE || 0,
     por_vencer: stateCounts.POR_VENCER || 0,
     vencidas: stateCounts.VENCIDA || 0,
@@ -150,9 +169,10 @@ export function transformWorkbook(inputPath, outDir = "data/seguros") {
   const faq = normalizeGeneric(rows(workbook, SHEETS.faq));
   const videos = normalizeGeneric(rows(workbook, SHEETS.videos));
   const catalogos = normalizeGeneric(rows(workbook, SHEETS.catalogos));
+  const riesgos_no_vehiculares = normalizeGeneric(rows(workbook, SHEETS.riesgos));
   const configRows = rows(workbook, SHEETS.config);
   const config = configObject(configRows);
-  const kpis = calcKpis(polizas, bienes);
+  const kpis = calcKpis(polizas, bienes, riesgos_no_vehiculares);
 
   const payload = {
     meta: {
@@ -173,6 +193,7 @@ export function transformWorkbook(inputPath, outDir = "data/seguros") {
     faq,
     videos,
     catalogos,
+    riesgos_no_vehiculares,
     kpis
   };
 
@@ -187,6 +208,7 @@ export function transformWorkbook(inputPath, outDir = "data/seguros") {
   writeJson(path.join(outDir, "faq.json"), faq);
   writeJson(path.join(outDir, "videos.json"), videos);
   writeJson(path.join(outDir, "catalogos.json"), catalogos);
+  writeJson(path.join(outDir, "riesgos-no-vehiculares.json"), riesgos_no_vehiculares);
   writeJson(path.join(outDir, "kpis.json"), kpis);
   writeJson(path.join(outDir, "sync-meta.json"), payload.meta);
 

@@ -125,17 +125,68 @@ function setConfig(data) {
   $("syncMeta").innerHTML = `🟢 Información actualizada al <b>${formatDate(meta.ultima_actualizacion)}</b>`;
 }
 
+
+function mostFrequentDate(values = []) {
+  const counts = {};
+  values.filter(Boolean).forEach(v => counts[v] = (counts[v] || 0) + 1);
+  return Object.entries(counts).sort((a,b)=>(b[1]-a[1]) || b[0].localeCompare(a[0]))[0]?.[0] || "";
+}
+
+function deriveDashboardKpis(kpis = {}) {
+  const polizas = getRows("polizas").filter(p => safe(p.mostrar_web).toUpperCase() !== "NO");
+  const bienes = getRows("bienes").filter(b => safe(b.mostrar_web).toUpperCase() !== "NO");
+  const riesgos = getRows("riesgos_no_vehiculares").filter(r => safe(r.mostrar_web).toUpperCase() !== "NO");
+  const ramos = [...new Set(polizas.map(p => clean(p.ramo)).filter(Boolean))];
+  const categorias = {};
+  bienes.forEach(b => {
+    const cat = clean(b.categoria) || "Sin categoría";
+    categorias[cat] = (categorias[cat] || 0) + 1;
+  });
+  const sumPolizas = polizas.reduce((s,p)=>s + (+p.suma_asegurada_poliza || 0), 0);
+  const sumBienes = bienes.reduce((s,b)=>s + (+b.total_asegurado || 0), 0);
+  const totalPrimas = polizas.reduce((s,p)=>s + (+p.total_pagado || 0), 0);
+  const vigenciaPrincipal = clean(kpis.vigencia_principal_hasta) || mostFrequentDate(polizas.map(p => clean(p.vig_hasta)));
+
+  return {
+    total_polizas: +kpis.total_polizas || polizas.length,
+    ramos_cubiertos: +kpis.ramos_cubiertos || ramos.length,
+    total_bienes: +kpis.total_bienes || bienes.length,
+    total_riesgos_no_vehiculares: +kpis.total_riesgos_no_vehiculares || riesgos.length,
+    total_motos: +kpis.total_motos || categorias["Motocicleta"] || categorias["Moto"] || 0,
+    total_camionetas: +kpis.total_camionetas || categorias["Camioneta"] || 0,
+    total_jeep_suv: +kpis.total_jeep_suv || categorias["Jeep/SUV"] || categorias["Jeep"] || categorias["SUV"] || 0,
+    total_cuadrones: +kpis.total_cuadrones || categorias["Cuadrón"] || categorias["Cuadron"] || 0,
+    total_suma_asegurada: +kpis.total_suma_asegurada || sumPolizas,
+    total_valor_bienes: +kpis.total_valor_bienes || sumBienes,
+    diferencia_polizas_bienes: Number(((+kpis.total_suma_asegurada || sumPolizas) - (+kpis.total_valor_bienes || sumBienes)).toFixed(2)),
+    total_primas: +kpis.total_primas || totalPrimas,
+    vigencia_principal_hasta: vigenciaPrincipal
+  };
+}
+
 function renderKPIs(kpis = {}) {
+  const d = deriveDashboardKpis(kpis);
   const items = [
-    ["Pólizas", kpis.total_polizas || 0],
-    ["Ramos cubiertos", kpis.ramos_cubiertos || 0],
-    ["Bienes vehiculares", kpis.total_bienes || 0],
-    ["Motos", kpis.total_motos || 0],
-    ["Camionetas", kpis.total_camionetas || 0],
-    ["Suma asegurada", money.format(kpis.total_suma_asegurada || 0)],
-    ["Prima / total pagado", money.format(kpis.total_primas || 0)],
-    ["Vigencia hasta", kpis.vigencia_principal_hasta ? formatDate(kpis.vigencia_principal_hasta) : "—"]
+    ["Pólizas", d.total_polizas || 0],
+    ["Ramos cubiertos", d.ramos_cubiertos || 0],
+    ["Bienes vehiculares", d.total_bienes || 0],
+    ["Motos", d.total_motos || 0],
+    ["Camionetas", d.total_camionetas || 0],
+    ["Jeep/SUV", d.total_jeep_suv || 0],
+    ["Cuadrón", d.total_cuadrones || 0],
+    ["Suma pólizas", money.format(d.total_suma_asegurada || 0)],
+    ["Valor bienes", money.format(d.total_valor_bienes || 0)],
+    ["Prima / total pagado", money.format(d.total_primas || 0)],
+    ["Vigencia hasta", d.vigencia_principal_hasta ? formatDate(d.vigencia_principal_hasta) : "—"]
   ];
+
+  if (d.total_riesgos_no_vehiculares > 0) {
+    items.splice(3, 0, ["Riesgos no vehiculares", d.total_riesgos_no_vehiculares]);
+  }
+  if (Math.abs(d.diferencia_polizas_bienes || 0) > 0.01) {
+    items.splice(items.length - 1, 0, ["Diferencia", money.format(d.diferencia_polizas_bienes)]);
+  }
+
   $("kpiGrid").innerHTML = items.map(([label, value]) => `<div class="kpi"><strong>${value}</strong><span>${label}</span></div>`).join("");
 }
 
