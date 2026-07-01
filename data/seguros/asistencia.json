@@ -9,7 +9,7 @@
     "descripcion": "Comunícate con el broker para asistencia en caso de siniestro, accidente, avería o coordinación con la aseguradora.",
     "condiciones": "No pactes acuerdos, no asumas responsabilidad y no realices pagos ni reparaciones sin autorización.",
     "mostrar_web": "SI",
-    "orden": "1"
+    "orden": 1
   },
   {
     "id_asistencia": "AST-002",
@@ -21,6 +21,18 @@
     "descripcion": "Informar al responsable administrativo, Talento Humano, responsable de bienes o custodio institucional para el registro y seguimiento interno del evento.",
     "condiciones": "Registrar respaldos, fotografías, videos y documentación del evento.",
     "mostrar_web": "SI",
-    "orden": "2"
+    "orden": 2
+  },
+  {
+    "id_asistencia": "AST-003",
+    "proveedor": "ASEGURADORA DEL SUR",
+    "servicio": "Servicio en siniestro y averías",
+    "telefono_principal": "099 555 3333",
+    "telefono_secundario": "(02) 299 7500",
+    "horario": "Según servicio contratado",
+    "descripcion": "Servicio de remolque o wincha cuando el vehículo no pueda movilizarse por sus propios medios.",
+    "condiciones": "Aplica según condiciones, antigüedad y restricciones de la póliza; coordinar por canales oficiales.",
+    "mostrar_web": "SI",
+    "orden": 3
   }
 ]

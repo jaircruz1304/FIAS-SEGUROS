@@ -42,7 +42,7 @@
     "tipo_cobertura": "Responsabilidad civil",
     "nombre_cobertura": "Responsabilidad civil a terceros",
     "descripcion": "Límite único combinado según cada póliza. En vehículos se observan límites de USD 30.000 o USD 40.000; en motos, USD 3.000.",
-    "limite_usd": "$30,000.00",
+    "limite_usd": 30000,
     "deducible": "Según póliza",
     "aplica_a": "Vehículos y motos",
     "mostrar_web": "SI"

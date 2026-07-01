@@ -1,7 +1,7 @@
 [
   {
     "id_paso": "PASO-001",
-    "orden": "1",
+    "orden": 1,
     "titulo": "Verifica la seguridad de las personas",
     "descripcion": "Detén el vehículo en un lugar seguro, activa luces de emergencia y prioriza la integridad de ocupantes y terceros.",
     "tipo": "HACER",
@@ -11,7 +11,7 @@
   },
   {
     "id_paso": "PASO-002",
-    "orden": "2",
+    "orden": 2,
     "titulo": "Llama a asistencia",
     "descripcion": "Comunícate con el broker o canal de asistencia vigente y proporciona placa, ubicación, tipo de evento y datos del conductor.",
     "tipo": "HACER",
@@ -21,7 +21,7 @@
   },
   {
     "id_paso": "PASO-003",
-    "orden": "3",
+    "orden": 3,
     "titulo": "Registra evidencia",
     "descripcion": "Toma fotografías y video del lugar, daños, placas, documentos y cualquier referencia útil para el reporte.",
     "tipo": "HACER",
@@ -31,7 +31,7 @@
   },
   {
     "id_paso": "PASO-004",
-    "orden": "4",
+    "orden": 4,
     "titulo": "No pactes acuerdos",
     "descripcion": "No realices acuerdos directos ni aceptes responsabilidad sin autorización de la aseguradora o responsable FIAS.",
     "tipo": "NO_HACER",
@@ -41,7 +41,7 @@
   },
   {
     "id_paso": "PASO-005",
-    "orden": "5",
+    "orden": 5,
     "titulo": "No realices pagos o reparaciones",
     "descripcion": "No contrates reparaciones, grúas o servicios externos sin aprobación previa, salvo emergencia debidamente justificada.",
     "tipo": "NO_HACER",
@@ -51,7 +51,7 @@
   },
   {
     "id_paso": "PASO-006",
-    "orden": "6",
+    "orden": 6,
     "titulo": "Comunica a FIAS",
     "descripcion": "Reporta el evento al responsable interno para abrir seguimiento administrativo, documental y de seguros.",
     "tipo": "HACER",
