@@ -22,5 +22,13 @@
     "categoria": "Asistencia",
     "orden": "3",
     "mostrar_web": "SI"
+  },
+  {
+    "id_faq": "FAQ-004",
+    "pregunta": "¿Dónde se actualizan los datos de la web?",
+    "respuesta": "La información se edita en el Excel maestro de OneDrive. GitHub Actions sincroniza el archivo y genera los JSON que consume la web.",
+    "categoria": "Sistema",
+    "orden": "4",
+    "mostrar_web": "SI"
   }
 ]
