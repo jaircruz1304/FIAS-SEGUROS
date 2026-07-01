@@ -1,26 +1,26 @@
 [
   {
     "id_faq": "FAQ-001",
-    "pregunta": "¿Qué hago si el vehículo no puede movilizarse?",
-    "respuesta": "Comunícate con la asistencia autorizada y solicita coordinación de grúa o wincha. Evita contratar servicios externos sin autorización.",
+    "pregunta": "¿Puedo contratar una grúa por mi cuenta?",
+    "respuesta": "No se recomienda. La asistencia debe coordinarse por los canales oficiales para evitar costos no reembolsables.",
     "categoria": "Asistencia",
-    "orden": "1",
+    "orden": 1,
     "mostrar_web": "SI"
   },
   {
     "id_faq": "FAQ-002",
-    "pregunta": "¿Puedo reparar el vehículo inmediatamente?",
-    "respuesta": "No. Primero se debe reportar el siniestro y esperar la autorización de la aseguradora o del responsable institucional.",
-    "categoria": "Siniestros",
-    "orden": "2",
+    "pregunta": "¿Todas las pólizas vencen igual?",
+    "respuesta": "La mayoría de pólizas cargadas finaliza el 01/01/2027; por eso se priorizó mostrar vigencia general y no un indicador de 'por vencer'.",
+    "categoria": "Vigencia",
+    "orden": 2,
     "mostrar_web": "SI"
   },
   {
     "id_faq": "FAQ-003",
-    "pregunta": "¿Qué información debo tener a la mano al llamar?",
-    "respuesta": "Placa, ubicación exacta, datos del conductor, tipo de evento, fotografías y una descripción breve de lo ocurrido.",
-    "categoria": "Asistencia",
-    "orden": "3",
+    "pregunta": "¿Qué hago si hay daños a terceros?",
+    "respuesta": "No asumas responsabilidad ni pactes pagos. Registra evidencia, llama a asistencia y comunica el evento a FIAS.",
+    "categoria": "Siniestro",
+    "orden": 3,
     "mostrar_web": "SI"
   }
 ]

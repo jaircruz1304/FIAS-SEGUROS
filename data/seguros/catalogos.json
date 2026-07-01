@@ -1,58 +1,58 @@
 [
   {
     "tipo_catalogo": "categoria_vehiculo",
-    "codigo": "MOTO",
-    "nombre": "Moto",
-    "orden": "1",
+    "codigo": "CAMIONETA",
+    "nombre": "Camioneta",
+    "orden": 1,
     "activo": "SI"
   },
   {
     "tipo_catalogo": "categoria_vehiculo",
-    "codigo": "CAMIONETA",
-    "nombre": "Camioneta",
-    "orden": "2",
+    "codigo": "CUADRÓN",
+    "nombre": "Cuadrón",
+    "orden": 2,
     "activo": "SI"
   },
   {
     "tipo_catalogo": "categoria_vehiculo",
     "codigo": "JEEP_SUV",
     "nombre": "Jeep/SUV",
-    "orden": "3",
+    "orden": 3,
     "activo": "SI"
   },
   {
     "tipo_catalogo": "categoria_vehiculo",
-    "codigo": "CUADRON",
-    "nombre": "Cuadrón",
-    "orden": "4",
+    "codigo": "MOTOCICLETA",
+    "nombre": "Motocicleta",
+    "orden": 4,
     "activo": "SI"
   },
   {
-    "tipo_catalogo": "mostrar_web",
-    "codigo": "SI",
-    "nombre": "Sí se muestra en la web",
-    "orden": "1",
+    "tipo_catalogo": "ramo",
+    "codigo": "EQUIPO_ELECTRONICO",
+    "nombre": "EQUIPO ELECTRONICO",
+    "orden": 1,
     "activo": "SI"
   },
   {
-    "tipo_catalogo": "mostrar_web",
-    "codigo": "NO",
-    "nombre": "No se muestra en la web",
-    "orden": "2",
+    "tipo_catalogo": "ramo",
+    "codigo": "MULTIRIESGO_INDUSTRIAL",
+    "nombre": "MULTIRIESGO INDUSTRIAL",
+    "orden": 2,
     "activo": "SI"
   },
   {
-    "tipo_catalogo": "tipo_paso",
-    "codigo": "HACER",
-    "nombre": "Qué hacer",
-    "orden": "1",
+    "tipo_catalogo": "ramo",
+    "codigo": "VEHICULOS_MOTOS_VO",
+    "nombre": "VEHICULOS/MOTOS VO",
+    "orden": 3,
     "activo": "SI"
   },
   {
-    "tipo_catalogo": "tipo_paso",
-    "codigo": "NO_HACER",
-    "nombre": "Qué no hacer",
-    "orden": "2",
+    "tipo_catalogo": "ramo",
+    "codigo": "VP_BIZ",
+    "nombre": "VP BIZ",
+    "orden": 4,
     "activo": "SI"
   }
 ]

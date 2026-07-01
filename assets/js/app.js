@@ -128,12 +128,13 @@ function setConfig(data) {
 function renderKPIs(kpis = {}) {
   const items = [
     ["Pólizas", kpis.total_polizas || 0],
-    ["Bienes asegurados", kpis.total_bienes || 0],
-    ["Suma asegurada", money.format(kpis.total_suma_asegurada || 0)],
-    ["Total pagado", money.format(kpis.total_primas || 0)],
+    ["Ramos cubiertos", kpis.ramos_cubiertos || 0],
+    ["Bienes vehiculares", kpis.total_bienes || 0],
     ["Motos", kpis.total_motos || 0],
     ["Camionetas", kpis.total_camionetas || 0],
-    ["Por vencer", kpis.por_vencer || 0]
+    ["Suma asegurada", money.format(kpis.total_suma_asegurada || 0)],
+    ["Prima / total pagado", money.format(kpis.total_primas || 0)],
+    ["Vigencia hasta", kpis.vigencia_principal_hasta ? formatDate(kpis.vigencia_principal_hasta) : "—"]
   ];
   $("kpiGrid").innerHTML = items.map(([label, value]) => `<div class="kpi"><strong>${value}</strong><span>${label}</span></div>`).join("");
 }
