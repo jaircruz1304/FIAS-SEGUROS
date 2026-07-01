@@ -5,7 +5,7 @@
     "descripcion": "Documento vigente del bien asegurado.",
     "obligatorio": "SI",
     "aplica_a": "Todos",
-    "orden": "1",
+    "orden": 1,
     "mostrar_web": "SI"
   },
   {
@@ -14,7 +14,7 @@
     "descripcion": "Licencia válida acorde al tipo de vehículo conducido.",
     "obligatorio": "SI",
     "aplica_a": "Todos",
-    "orden": "2",
+    "orden": 2,
     "mostrar_web": "SI"
   },
   {
@@ -23,7 +23,7 @@
     "descripcion": "Documento de identificación del conductor o custodio.",
     "obligatorio": "SI",
     "aplica_a": "Todos",
-    "orden": "3",
+    "orden": 3,
     "mostrar_web": "SI"
   },
   {
@@ -32,7 +32,7 @@
     "descripcion": "Evidencia del hecho, daños y contexto del siniestro.",
     "obligatorio": "SI",
     "aplica_a": "Siniestro",
-    "orden": "4",
+    "orden": 4,
     "mostrar_web": "SI"
   },
   {
@@ -41,7 +41,7 @@
     "descripcion": "Aplica en siniestros con terceros, lesiones, robo o hurto.",
     "obligatorio": "SEGUN_CASO",
     "aplica_a": "Robo / Siniestro",
-    "orden": "5",
+    "orden": 5,
     "mostrar_web": "SI"
   },
   {
@@ -50,7 +50,7 @@
     "descripcion": "Reporte administrativo para control y seguimiento institucional.",
     "obligatorio": "SI",
     "aplica_a": "Todos",
-    "orden": "6",
+    "orden": 6,
     "mostrar_web": "SI"
   }
 ]
