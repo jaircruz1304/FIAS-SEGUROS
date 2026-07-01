@@ -2,7 +2,7 @@
   "meta": {
     "sistema": "FIAS Seguro Vehicular",
     "version": "1.0.0",
-    "ultima_actualizacion": "2026-07-01T15:24:49.270Z",
+    "ultima_actualizacion": "2026-07-01T15:37:06.184Z",
     "fuente": "OneDrive / SharePoint + GitHub Actions",
     "archivo_excel": "Base_Datos_Seguros_Vehiculares_FIAS.xlsx",
     "timezone": "America/Guayaquil"
@@ -438,7 +438,7 @@
       "ramo": "VEHICULOS/MOTOS VO",
       "documento": "POLIZA",
       "anexo": "0",
-      "renovacion": "0",
+      "renovacion": "",
       "aseguradora": "ASEGURADORA DEL SUR C.A.",
       "asegurado": "FONDO DE INVERSION AMBIENTAL SOSTENIBLE",
       "ruc_asegurado": "1792807999001",
@@ -456,10 +456,10 @@
       "total_pagado": 967.23,
       "moneda": "USD",
       "fecha_max_pago": "2026-04-21",
-      "estado_pago": "PENDIENTE DE CONFIRMAR",
-      "reserva_proyecto": "b3e6206c-667c-4045-a0f7-ebda111db680.pdf",
+      "estado_pago": "PAGADO",
+      "reserva_proyecto": "PASNAP",
       "pdf_nombre": "Póliza de 7 motocicletas Honda XR150L, vigencia 01/04/2026 al 01/01/2027. Suma asegurada total: USD 26.739,93.",
-      "observaciones": "SI",
+      "observaciones": "",
       "mostrar_web": "SI",
       "estado": "VIGENTE",
       "dias_restantes": 184
@@ -1424,14 +1424,6 @@
       "respuesta": "Placa, ubicación exacta, datos del conductor, tipo de evento, fotografías y una descripción breve de lo ocurrido.",
       "categoria": "Asistencia",
       "orden": "3",
-      "mostrar_web": "SI"
-    },
-    {
-      "id_faq": "FAQ-004",
-      "pregunta": "¿Dónde se actualizan los datos de la web?",
-      "respuesta": "La información se edita en el Excel maestro de OneDrive. GitHub Actions sincroniza el archivo y genera los JSON que consume la web.",
-      "categoria": "Sistema",
-      "orden": "4",
       "mostrar_web": "SI"
     }
   ],
