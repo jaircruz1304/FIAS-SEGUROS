@@ -20,9 +20,14 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          # Usar Node 24 para evitar avisos de deprecación de Node 20.
+          node-version: "24"
+          # No activar cache aquí si el repositorio no tiene package-lock.json.
+          # cache: "npm"
 
       - name: Instalar dependencias
+        # Se usa npm install porque el repositorio no tiene package-lock.json.
+        # npm ci falla cuando no existe package-lock.json.
         run: npm install
 
       - name: Descargar Excel desde enlace compartido de OneDrive / SharePoint
