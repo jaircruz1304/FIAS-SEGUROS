@@ -6,7 +6,7 @@
     "archivo_repo": "assets/videos/asistencia-siniestro.mp4",
     "miniatura_repo": "",
     "categoria": "Siniestro",
-    "orden": 1,
+    "orden": "1",
     "mostrar_web": "SI"
   },
   {
@@ -16,7 +16,7 @@
     "archivo_repo": "assets/videos/prevencion-conduccion.mp4",
     "miniatura_repo": "",
     "categoria": "Prevención",
-    "orden": 2,
+    "orden": "2",
     "mostrar_web": "SI"
   }
 ]

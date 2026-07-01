@@ -1,13 +1,21 @@
 {
-  "total_polizas": 18,
+  "total_polizas": 14,
   "total_bienes": 26,
-  "total_motos": 18,
+  "total_motos": 0,
   "total_camionetas": 5,
   "total_jeep_suv": 2,
   "total_cuadrones": 1,
-  "total_suma_asegurada": 1276341.19,
-  "total_primas": 17021.67,
-  "ramos_cubiertos": 4,
-  "vigencia_principal_hasta": "2027-01-01",
-  "cobertura_anual": "2026-01-01 a 2027-01-01"
+  "total_suma_asegurada": 254352.12,
+  "total_valor_bienes": 254352.12,
+  "total_primas": 8681.04,
+  "vigentes": 14,
+  "por_vencer": 0,
+  "vencidas": 0,
+  "sin_fecha": 0,
+  "categorias": {
+    "Motocicleta": 18,
+    "Cuadrón": 1,
+    "Jeep/SUV": 2,
+    "Camioneta": 5
+  }
 }
