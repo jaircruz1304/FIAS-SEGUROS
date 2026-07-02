@@ -6,7 +6,7 @@
     "telefono_principal": "1-800 273783",
     "telefono_secundario": "(02) 381 9880",
     "horario": "24/7",
-    "descripcion": "Comunícate con el broker para asistencia en caso de siniestro, accidente, avería o coordinación con la aseguradora.",
+    "descripcion": "Comunícate con el broker para asistencia en caso de siniestro, accidente, avería, quienes realizaran la coordinación con la aseguradora.",
     "condiciones": "No pactes acuerdos, no asumas responsabilidad y no realices pagos ni reparaciones sin autorización.",
     "mostrar_web": "SI",
     "orden": "1"
@@ -14,25 +14,25 @@
   {
     "id_asistencia": "AST-002",
     "proveedor": "FIAS",
-    "servicio": "Comunicar al jefe inmediato via correo/telefonica acerca del sinisetro",
-    "telefono_principal": "",
-    "telefono_secundario": "",
+    "servicio": "Aviso Jefe Inmediato",
+    "telefono_principal": "Contacto",
+    "telefono_secundario": "jbravo@fias.org.ec",
     "horario": "Horario institucional",
-    "descripcion": "",
-    "condiciones": "Registrar respaldos, fotografías, videos y documentación del evento.",
+    "descripcion": "Comunicar al jefe inmediato vía correo/telefónica acerca del sinisetro",
+    "condiciones": "Registrar respaldos, fotografías, videos y documentación del evento de ser posible y si no existen personas heridas.",
     "mostrar_web": "SI",
     "orden": "2"
   },
   {
     "id_asistencia": "AST-003",
     "proveedor": "FIAS",
-    "servicio": "Comunicar a la dirección Administrativa y TTHH, con copia al Especialista Administrativo de FIAS",
+    "servicio": "Aviso FIAS",
     "telefono_principal": "+593 998017925",
     "telefono_secundario": "jcruzg@fias.org.ec",
     "horario": "Horario institucional",
-    "descripcion": "Informar al responsable administrativo, Talento Humano, responsable de bienes o custodio institucional para el registro y seguimiento interno del evento.",
+    "descripcion": "Informar al responsable administrativo y de Talento Humano, responsable de bienes o custodio institucional para el registro y seguimiento interno del evento.",
     "condiciones": "",
     "mostrar_web": "SI",
-    "orden": "2"
+    "orden": "3"
   }
 ]
