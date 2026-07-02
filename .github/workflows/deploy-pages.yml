@@ -1,4 +1,4 @@
-name: Sincronizar OneDrive y publicar Web FIAS
+name: Publicar Web FIAS desde OneDrive
 
 on:
   workflow_dispatch:
@@ -13,9 +13,11 @@ permissions:
   pages: write
   id-token: write
 
+# Evita que dos despliegues de Pages se cancelen entre sí.
+# Si entra una ejecución nueva, GitHub la deja en cola en lugar de cancelar la anterior.
 concurrency:
-  group: "pages"
-  cancel-in-progress: true
+  group: "fias-pages"
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
