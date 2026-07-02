@@ -82,17 +82,5 @@
     "deducible": "Según póliza",
     "aplica_a": "Multiriesgo",
     "mostrar_web": "SI"
-  },
-  {
-    "id_cobertura": "COB-EE-001",
-    "id_poliza": "",
-    "id_bien": "",
-    "tipo_cobertura": "Equipo electrónico",
-    "nombre_cobertura": "Daños eléctricos, variaciones de voltaje y equipo electrónico",
-    "descripcion": "Ampara equipos fijos, portátiles, celulares, drones o portadores externos según detalle de cada póliza.",
-    "limite_usd": "",
-    "deducible": "Según póliza",
-    "aplica_a": "Equipo electrónico",
-    "mostrar_web": "SI"
   }
 ]

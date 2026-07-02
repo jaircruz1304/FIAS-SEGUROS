@@ -2,7 +2,7 @@
   "meta": {
     "sistema": "FIAS Seguro Vehicular",
     "version": "1.0.0",
-    "ultima_actualizacion": "2026-07-01T21:09:45.404Z",
+    "ultima_actualizacion": "2026-07-02T00:46:51.420Z",
     "fuente": "OneDrive / SharePoint + GitHub Actions",
     "archivo_excel": "Base_Datos_Seguros_Vehiculares_FIAS.xlsx",
     "timezone": "America/Guayaquil"
@@ -1278,18 +1278,6 @@
       "limite_usd": "",
       "deducible": "Según póliza",
       "aplica_a": "Multiriesgo",
-      "mostrar_web": "SI"
-    },
-    {
-      "id_cobertura": "COB-EE-001",
-      "id_poliza": "",
-      "id_bien": "",
-      "tipo_cobertura": "Equipo electrónico",
-      "nombre_cobertura": "Daños eléctricos, variaciones de voltaje y equipo electrónico",
-      "descripcion": "Ampara equipos fijos, portátiles, celulares, drones o portadores externos según detalle de cada póliza.",
-      "limite_usd": "",
-      "deducible": "Según póliza",
-      "aplica_a": "Equipo electrónico",
       "mostrar_web": "SI"
     }
   ],
