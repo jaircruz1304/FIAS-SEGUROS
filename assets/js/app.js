@@ -1,4 +1,5 @@
 const DATA_URL = "./data/seguros/seguros-vehiculares.json";
+const buildDataUrl = () => `${DATA_URL}?v=${Date.now()}`;
 let STORE = null;
 let policyPage = 1;
 let vehiclePage = 1;
@@ -516,7 +517,7 @@ function renderVideos(rows = []) {
 
 async function init() {
   try {
-    const res = await fetch(DATA_URL, { cache: "no-store" });
+    const res = await fetch(buildDataUrl(), { cache: "no-store", headers: { "Cache-Control": "no-cache" } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     STORE = await res.json();
 

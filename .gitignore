@@ -1,0 +1,7 @@
+# Datos generados desde OneDrive/SharePoint: no versionar en el repositorio
+data/seguros/*.json
+!data/seguros/.gitkeep
+# Archivos temporales de workflows/local
+tmp/
+public/
+node_modules/

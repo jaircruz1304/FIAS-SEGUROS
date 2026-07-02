@@ -1,9 +1,12 @@
-name: Publicar GitHub Pages
+name: Sincronizar OneDrive y publicar Web FIAS
 
 on:
+  workflow_dispatch:
   push:
     branches: ["main"]
-  workflow_dispatch:
+  schedule:
+    # Cada 6 horas. GitHub Actions usa UTC.
+    - cron: "0 */6 * * *"
 
 permissions:
   contents: read
@@ -15,22 +18,61 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
 
-      - name: Configurar Pages
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Preparar carpeta pública limpia
+        run: |
+          rm -rf public tmp
+          mkdir -p public tmp
+          rsync -av ./ public/             --exclude='.git'             --exclude='.github'             --exclude='node_modules'             --exclude='tmp'             --exclude='public'             --exclude='templates'             --exclude='scripts'             --exclude='package.json'             --exclude='package-lock.json'             --exclude='data/seguros/*.json'
+          mkdir -p public/data/seguros
+
+      - name: Descargar Excel real desde OneDrive / SharePoint
+        run: node scripts/fetch-onedrive-excel.js
+        env:
+          FIAS_SEGUROS_EXCEL_URL: ${{ vars.FIAS_SEGUROS_EXCEL_URL }}
+          FIAS_SEGUROS_SHARE_ID: ${{ vars.FIAS_SEGUROS_SHARE_ID }}
+          FIAS_SHAREPOINT_DOWNLOAD_BASE: ${{ vars.FIAS_SHAREPOINT_DOWNLOAD_BASE }}
+          OUTPUT_EXCEL_PATH: tmp/Base_Datos_Seguros_Vehiculares_FIAS.xlsx
+
+      - name: Transformar Excel real a JSON del sitio publicado
+        run: node scripts/build-data.js
+        env:
+          OUTPUT_EXCEL_PATH: tmp/Base_Datos_Seguros_Vehiculares_FIAS.xlsx
+          OUT_DATA_DIR: public/data/seguros
+
+      - name: Validar JSON generado desde OneDrive
+        run: node scripts/validate-seguros.js
+        env:
+          DATA_PATH: public/data/seguros/seguros-vehiculares.json
+
+      - name: Mostrar resumen de datos publicados
+        run: |
+          node -e "const fs=require('fs'); const d=JSON.parse(fs.readFileSync('public/data/seguros/seguros-vehiculares.json','utf8')); console.log('Pólizas:', d.polizas?.length || 0); console.log('Bienes:', d.bienes?.length || 0); console.log('Actualización:', d.meta?.ultima_actualizacion || ''); console.log('Fuente:', d.meta?.archivo_excel || d.meta?.fuente || 'OneDrive');"
+
+      - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Subir artefacto estático
+      - name: Subir artefacto generado
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "."
+          path: public
 
       - name: Publicar
         id: deployment
